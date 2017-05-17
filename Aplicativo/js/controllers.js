@@ -171,7 +171,7 @@ return cboll;
             return;
           }
         }
-        rrcpf = $scope.validaCPF("cpf");
+        rrcpf = $scope.validaCPF(strCPF);
         if(rrcpf == true)
         {
           rcpf = document.getElementById("cpf").value;
@@ -251,6 +251,9 @@ return cboll;
         {
           if(data == true)
           {
+            $scope.matricula = ematricula;
+            alert(ematricula);
+            localStorage.setItem("matricula",$scope.matricula);
             $state.go("menu");
           }
           else
@@ -281,7 +284,9 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams, $http) {
   $scope.extrato = function ()
   {
-    $http.get("Extrato.php").
+    $scope.matricula = localStorage.getItem("matricula");
+    var parameter = JSON.stringify({type:'Compras',matricula:$scope.matricula});
+    $http.post("Extrato.php",parameter).
     success(function(data,status,headers,config)
     {
       alert (JSON.stringify(data));

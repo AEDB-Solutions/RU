@@ -4,4 +4,4 @@ include ('DbController.php');
 
   $extrato = new Controller();
  // $matricula = "14/0150498";
-  $extrato->checkExtract($_SESSION['login_user']);
+  $extrato->checkExtract($meuobjeto->matricula);
