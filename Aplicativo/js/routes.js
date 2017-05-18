@@ -48,7 +48,7 @@ angular.module('app.routes', [])
 
   .state('capacidade', {
     url: '/page6',
-    templateUrl: 'templates/capacity.html',
+    templateUrl: 'templates/lotacao.php',
     controller: 'capacityCtrl',
     })
 
