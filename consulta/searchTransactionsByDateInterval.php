@@ -34,7 +34,7 @@ class SearchTransactionsByDateInterval
 
         try {
             //credenciais pegas por uma função ja existente na pagsegurolibrary.php
-            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "E33D8CBC88EC4EF29CAE93DB68E8B040");
+            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "9960E1D155F941E2A3DAA3F6494821CB");
             
 
             $result = PagSeguroTransactionSearchService::searchByDate(
@@ -67,6 +67,7 @@ class SearchTransactionsByDateInterval
                 echo "Data: " . $transactionSummary->getDate() . "<br>";
                 //echo "Status: " . $transactionSummary->getStatus() . "<br>";
                 //o status da compra não está funcionando, e neste tipo de consulta o pagseguro não retorna o nome ou o email do comprador.
+                
                 echo "<hr>";
             }
         }
