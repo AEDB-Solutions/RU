@@ -1,6 +1,7 @@
 <?php
 include ('connectDB.php');
 include ('OperationController.php');
+require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 Class Controller {
 	function check($matricula, $senha){
      $myConnect = new ConnectDB();
@@ -38,6 +39,41 @@ Class Controller {
 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
 		}
 	}
+  function addDataToOurDB(PagSeguroTransactionSearchResult $result, $initialDate, $finalDate){
+    $pagseguro = new ConnectToPagseguro();
+    $pagseguro->connectDate();
+    $result = $pagseguro->result;
+    //checar ultimo codigo no sql
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $sql = "SELECT Codigo FROM Compras ORDER BY ID DESC LIMIT 1";
+    $sqlresult = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_array($sqlresult,MYSQLI_ASSOC);
+    $lastCode = $row["Codigo"];
+
+
+    $transactions = $result->getTransactions();
+    if (is_array($transactions) && count($transactions) > 0) {
+        foreach ($transactions as $key => $transactionSummary) {
+          if($transactionSummary->getCode() != $lastCode){
+            $codigo = $transactionSummary->getCode();    //codigo
+            $ref = $transactionSummary->getReference(); //referência não aparece pq nenhuma compra foi efetivada.
+            $valor = $transactionSummary->getGrossAmount(); //montante
+            $data = $transactionSummary->getDate();  //data
+            $horario;
+            //echo "Status: " . $transactionSummary->getStatus() . "<br>";
+            //o status da compra não está funcionando, e neste tipo de consulta o pagseguro não retorna o nome ou o email do comprador.
+            $sql = "INSERT INTO Compras (Data, Valor, Matricula, Horario, Codigo, Referencia) VALUES ('$data', '$valor', '$matricula', '$horario', '$codigo', '$ref')";
+            if(mysqli_query($conn, $sql)){ 
+              echo "deu bom!";
+            }
+            else "deu ruim " . mysqli_error($conn);
+          }
+        }
+    }
+    }
+  }
   function checkUserCredit($matricula){
     $myConnect = new ConnectDB();
     $myConnect->Connect();

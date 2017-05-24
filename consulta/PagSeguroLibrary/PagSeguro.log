@@ -182,3 +182,20 @@
   'TotalPages' => '1',
   'Results in this page' => '6',
 ) 
+{2017/05/22 21:16:16} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - begin 
+{2017/05/22 21:16:17} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - end PagSeguroSearchResult: array (
+  'Date' => '2017-05-22T16:16:16.000-03:00',
+  'CurrentPage' => '1',
+  'TotalPages' => '1',
+  'Results in this page' => '6',
+) 
+{2017/05/22 22:57:59} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=, finalDate=) - begin 
+{2017/05/22 22:58:00} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=, finalDate=) - end [HTTP 401] - UNAUTHORIZED  
+{2017/05/22 22:58:02} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - begin 
+{2017/05/22 22:58:02} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - end [HTTP 401] - UNAUTHORIZED  
+{2017/05/22 22:58:06} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - begin 
+{2017/05/22 22:58:07} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - end [HTTP 401] - UNAUTHORIZED  
+{2017/05/22 22:58:32} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - begin 
+{2017/05/22 22:58:32} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - end [HTTP 401] - UNAUTHORIZED  
+{2017/05/22 22:58:58} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - begin 
+{2017/05/22 22:58:58} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-04-15T00:00, finalDate=2017-05-15T23:59) - end [HTTP 401] - UNAUTHORIZED  
