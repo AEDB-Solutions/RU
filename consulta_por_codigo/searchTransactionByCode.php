@@ -17,7 +17,7 @@ content="text/html; charset=utf-8" />
    <form action="lol.php" method="post">
 <?php
 
-$token ='9960E1D155F941E2A3DAA3F6494821CB';
+$token ='2074A2AE86E64809AC7F8CF009DD7EDF';
 $email = 'ruonlineunb@gmail.com';
 
 
