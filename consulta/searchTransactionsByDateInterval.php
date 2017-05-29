@@ -34,7 +34,7 @@ class SearchTransactionsByDateInterval
 
         try {
             //credenciais pegas por uma função ja existente na pagsegurolibrary.php
-            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "9960E1D155F941E2A3DAA3F6494821CB");
+            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "2D94DB3449144869A4BA676FAC508F00");
             
 
             $result = PagSeguroTransactionSearchService::searchByDate(
@@ -58,6 +58,7 @@ class SearchTransactionsByDateInterval
         $finalDate = $finalDate ? $finalDate : 'now';
         echo "<h2>Consulta de Transações por Data</h2>";
         echo "<h3>$initialDate até $finalDate</h3>";
+        var_dump($result);
         $transactions = $result->getTransactions();
         if (is_array($transactions) && count($transactions) > 0) {
             foreach ($transactions as $key => $transactionSummary) {
