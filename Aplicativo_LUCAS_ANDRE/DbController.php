@@ -1,6 +1,7 @@
 <?php
 include ('connectDB.php');
 include ('OperationController.php');
+include ('Transacao.class.php');
 require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 Class Controller {
 	function check($matricula, $senha){
@@ -40,38 +41,49 @@ Class Controller {
 		}
 	}
   function addDataToOurDB(PagSeguroTransactionSearchResult $result, $initialDate, $finalDate){
-    $pagseguro = new ConnectToPagseguro();
-    $pagseguro->connectDate();
-    $result = $pagseguro->result;
-    //checar ultimo codigo no sql
+    //define a timezone brasileira, para poder usar a função date
+    date_default_timezone_set("Brazil/East");
+    //procura em um espaço de 30 dias da ultima data (limitação do proprio pagseguro)
+    $d = strtotime("-30 days");
+    $finalDate = date("Y-m-d") ."T". date("H:i:s");
+    $initialDate = date("Y-m-d", $d) . "T" . date("H:i:s");
+
+    //conecta ao banco de dados
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-    $sql = "SELECT Codigo FROM Compras ORDER BY ID DESC LIMIT 1";
-    $sqlresult = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_array($sqlresult,MYSQLI_ASSOC);
-    $lastCode = $row["Codigo"];
 
-
-    $transactions = $result->getTransactions();
+    //cria um objeto que se conecta ao pagseguro
+    $pagseguro = new ConnectToPagseguro();
+    //procura as transações, filtrando por data.
+    $transactions = $pagseguro->connectDate($initialDate, $finalDate)->getTransactions();
     if (is_array($transactions) && count($transactions) > 0) {
+      //para cada transação, ele da os dados de codigo, valor, data e referencia.
         foreach ($transactions as $key => $transactionSummary) {
-          if($transactionSummary->getCode() != $lastCode){
-            $codigo = $transactionSummary->getCode();    //codigo
-            $ref = $transactionSummary->getReference(); //referência não aparece pq nenhuma compra foi efetivada.
-            $valor = $transactionSummary->getGrossAmount(); //montante
-            $data = $transactionSummary->getDate();  //data
-            $horario;
-            //echo "Status: " . $transactionSummary->getStatus() . "<br>";
-            //o status da compra não está funcionando, e neste tipo de consulta o pagseguro não retorna o nome ou o email do comprador.
-            $sql = "INSERT INTO Compras (Data, Valor, Matricula, Horario, Codigo, Referencia) VALUES ('$data', '$valor', '$matricula', '$horario', '$codigo', '$ref')";
-            if(mysqli_query($conn, $sql)){ 
-              echo "deu bom!";
+          //pega o codigo da transação
+          $code = $transactionSummary->getCode();
+          //pega as informações de comprador, procurando por codigo as informações
+          $transactiondata = $pagseguro->connectCode($code);
+          $valor = $transactionSummary->getGrossAmount();
+          $mail = $transactiondata->getSender()->getEmail();
+          echo $mail . "<br>";
+          $datahorario = $transactiondata->getDate();
+          $data = strtok($datahorario, 'T');
+          $horario = strtok(".");
+
+           /*
+           Pegar dados matricula do usuario via email.
+            Pegar informação de Codigo, montante, data e horario
+            adicionar no banco de dados*/
+
+            $sql = "INSERT INTO Compras (Codigo, Matricula, Email, Valor, Data, Horario) VALUES ('$code', (SELECT Matricula FROM Users WHERE Email = '$mail'), '$mail', '$valor', '$data', '$horario')";
+            if(mysqli_query($conn, $sql)){
+              echo "Dados adicionados com sucesso!";
             }
-            else "deu ruim " . mysqli_error($conn);
-          }
+            else {
+              echo "batata";
+            }
         }
-    }
     }
   }
   function checkUserCredit($matricula){
@@ -93,13 +105,10 @@ Class Controller {
     $conn = $myConnect->conn;
     $sql = "SELECT Data, Valor FROM Compras WHERE Matricula = '$matricula'";
     if($result = mysqli_query($conn,$sql)) {
-        $data = array();
-        $valor = array();
+        $send = array();
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            array_push($data, $row["Data"]);
-            array_push($valor, $row["Valor"]);
+            array_push($send, new Transacao($row["Data"], $row["Valor"]));
           }
-        $send = array($data, $valor);
         echo json_encode($send);
       }
       else {
