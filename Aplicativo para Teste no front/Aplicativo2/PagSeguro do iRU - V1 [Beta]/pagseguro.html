@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Compre seu RU!</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script>
+
+function enviaPagseguro(){
+$.post('pagseguro.php','',function(data){
+$('#code').val(data);
+$('#comprar').submit();
+})
+}
+
+</script>
+
+</head>
+
+<body>
+	<div>
+		<center>
+		<h1>Compre seu RU!</h1></center>
+		<center><p>Preço: R$2,50</p></center>
+<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+<center><form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+<input type="hidden" name="itemCode" value="9F9FA85EFCFCF34EE478BF8DB1612947" />
+<input type="hidden" name="iot" value="button" />
+<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+</form>
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script></center>
+<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+
+</div>
+
+<form id="comprar" action="https://pagseguro.uol.com.br/v2/checkout/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+
+<input type="hidden" name="code" id="code" value="" />
+
+</form>
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+</body>
+</html>
+
+ 
+
+ 
+

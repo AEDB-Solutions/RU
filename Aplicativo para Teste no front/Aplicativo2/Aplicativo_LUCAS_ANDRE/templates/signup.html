@@ -1,0 +1,27 @@
+<ion-view title="Signup" id="page7" style="background-color: rgb(66, 135, 19);">
+  <ion-content padding="true" class="has-header">
+    <form id="contact-form" class="list">
+      <ion-list id="signup-list1">
+        <div class="spacer" style="height: 150px;"></div>
+        <label class="item item-input">
+          <span class="input-label">Usuário</span>
+          <input placeholder="Digite nome completo" type="text" id="userName">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Matricula</span>
+          <input name="matricula1" placeholder="42/4242424" type="text" onkeyup="maskMatricula(this);" maxlength="10" id="matrIcula">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input placeholder="exemplo@exemplo.com" type="text" id="Email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input placeholder="Mínimo de 6 caracteres" type="password" id="passWord">
+        </label>
+        <div class="spacer" style="height: 50px;"></div>
+      </ion-list>
+      <b ui-sref="signup" id="signup-button10" class="button button-stable button-block" ng-click='enviacadastro()'>Cadastrar!</b>
+    </form>
+  </ion-content>
+</ion-view>
