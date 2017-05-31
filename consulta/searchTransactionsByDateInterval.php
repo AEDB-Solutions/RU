@@ -34,7 +34,7 @@ class SearchTransactionsByDateInterval
 
         try {
             //credenciais pegas por uma função ja existente na pagsegurolibrary.php
-            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "2074A2AE86E64809AC7F8CF009DD7EDF");
+            $credentials = new PagSeguroAccountCredentials("ruonlineunb@gmail.com", "CBF0302039274DFB88479472A7C3EB98");
             
 
             $result = PagSeguroTransactionSearchService::searchByDate(

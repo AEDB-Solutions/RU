@@ -35,7 +35,7 @@ class PagSeguroConfigWrapper
     /**
      *
      */
-    const PAGSEGURO_TOKEN_PRODUCTION = '2074A2AE86E64809AC7F8CF009DD7EDF';
+    const PAGSEGURO_TOKEN_PRODUCTION = 'CBF0302039274DFB88479472A7C3EB98';
     /**
      *
      */
