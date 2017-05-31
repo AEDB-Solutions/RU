@@ -2,9 +2,9 @@
 require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 class ConnectToPagseguro{
     private $email = "ruonlineunb@gmail.com";
-    private $token = "13781196BDE342C680FF4CFFE58A4B22";
-    function connectDate($initialDate, $finalDate){
-        $pageNumber = 1;
+    private $token = "A173387059844BB78C15679EBAB67B84";
+	function connectDate($initialDate, $finalDate){
+		$pageNumber = 1;
         $maxPageResults = 20;
         try {
             //credenciais pegas por uma função ja existente na pagsegurolibrary.php
@@ -31,23 +31,6 @@ class ConnectToPagseguro{
             );
             return $result;
         } catch (PagSeguroServiceException $e) {
-            die($e->getMessage());
-        }
-    }
-    function connectReference($reference, $initialDate, $finalDate){
-        $pageNumber = 1;
-        $maxPageResults = 20;
-        try {
-            $credentials = new PagSeguroAccountCredentials($this->email, $this->token);
-            $result = PagSeguroTransactionSearchService::searchByReference(
-                $credentials,
-                $reference,
-                $initialDate,
-                $finalDate,
-                $pageNumber,
-                $maxPageResults);
-            return $result;
-        } catch(PagSeguroServiceException $e){
             die($e->getMessage());
         }
     }
