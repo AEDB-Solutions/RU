@@ -64,6 +64,12 @@ angular.module('app.routes', [])
     controller: 'dadosCtrl',
     })
 
+  .state('presente', {
+    url: '/page9',
+    templateUrl: 'templates/gift.html',
+    controller: 'giftCtrl',
+    })
+
 
 $urlRouterProvider.otherwise('/page1')
 

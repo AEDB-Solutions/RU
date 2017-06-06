@@ -414,3 +414,52 @@ function ($scope, $stateParams, $http) {
       alert(data);
     });
 }}])
+
+.controller('giftCtrl', ['$scope','$stateParams','$http','$ionicPopup', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, $http, $ionicPopup) {
+
+	$scope.showConfirm = function() {
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Tem certeza que deseja presentear o seu amigo?',
+       template: 'ATENÇÃO: Esse processo é irreversível.'
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+         $scope.enviadadosgift();
+       } else {
+         alert("Operação cancelada!");
+       }
+     })
+   }
+
+	$scope.enviadadosgift = function ()
+	{
+		$scope.matricula = localStorage.getItem("matricula");
+		var matricula = $scope.matricula
+		var matriculagift = document.getElementById("matriculagift").value;
+		var qtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
+		var passwordconfirm = document.getElementById("confirmpassword").value;
+  		var parameter = JSON.stringify({type:'Presente',matricula:matricula,matriculagift:matriculagift,refeicoes:qtrefeicoesgift,password:confirmpassword});
+        	$http.post("presente.php", parameter).
+	        success(function(data,status,headers,config)
+	        {
+	          if(data == true)
+	          {
+	            alert("Presente enviado com sucesso");
+	          }
+	          else
+	          {
+	            if(data == false)
+	            {
+	              alert("Error");
+	            }
+	          }
+	        }).
+	        error(function(data,status,headers,config)
+	        {
+	          console.log(passwordconfirm);
+	        });
+	}
+}])

@@ -2,7 +2,7 @@
 class ConnectDB {
     private $servername = "localhost";
     private $username = "root";
-    private $passcode = "root";
+    private $passcode = "";
     public $dbname = "Test";
     public $conn;
     // Create connection
