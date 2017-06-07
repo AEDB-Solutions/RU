@@ -255,8 +255,6 @@ return cboll;
         {
           if(data == true)
           {
-            $scope.matricula = ematricula;
-            alert(ematricula);
             localStorage.setItem("matricula",$scope.matricula);
             $state.go("menu");
           }
@@ -437,11 +435,12 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 	$scope.enviadadosgift = function ()
 	{
 		$scope.matricula = localStorage.getItem("matricula");
-		var matricula = $scope.matricula
-		var matriculagift = document.getElementById("matriculagift").value;
-		var qtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
-		var passwordconfirm = document.getElementById("confirmpassword").value;
-  		var parameter = JSON.stringify({type:'Presente',matricula:matricula,matriculagift:matriculagift,refeicoes:qtrefeicoesgift,password:confirmpassword});
+		var gmatricula = $scope.matricula
+		var gmatriculagift = document.getElementById("matriculagift").value;
+		var gqtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
+		var gpasswordconfirm = document.getElementById("confirmpassword").value;
+		var gift = [gmatricula,gmatriculagift,gqtrefeicoesgift,gpasswordconfirm]
+  		var parameter = JSON.stringify({type:'Presente',matricula:gmatricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gconfirmpassword});
         	$http.post("presente.php", parameter).
 	        success(function(data,status,headers,config)
 	        {
@@ -462,4 +461,72 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 	          console.log(passwordconfirm);
 	        });
 	}
+}])
+
+.controller('fpasswordCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, $http, $ionicPopup) {
+	$scope.showPopup = function() {
+   $scope.data = {}
+
+   // An elaborate, custom popup
+   var myPopup = $ionicPopup.show({
+     template: '<input type="password" ng-model="data.wifi">',
+     title: 'Digite sua nova senha',
+     //subTitle: '',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancelar' },
+       {
+         text: '<b>Salvar</b>',
+         type: 'button-positive',
+         onTap: function(e) {
+           if (!$scope.data.wifi) {
+             //don't allow the user to close unless he enters wifi password
+             e.preventDefault();
+           } else {
+             return $scope.data.wifi;
+           }
+         }
+       },
+     ]
+   });
+   myPopup.then(function(res) {
+   	if(res)
+   	{
+     $scope.forgottenpassword();
+   	}else
+   	{
+   		alert("Operação cancelada");
+   	}
+   });
+  }
+	$scope.forgottenpassword = function ()
+	{
+		var cemail = document.getElementById("emailconfirm").value;
+		var ccpf = document.getElementById("cpfconfirm").value;
+		var confirmdata = [cemail,ccpf]
+		var parameter = JSON.stringify({type:'confirmdata',email:cemail,cpf:ccpf})
+		$http.post("Fpassword.php", parameter).
+        success(function(data,status,headers,config)
+        {
+          if(data == true)
+          {
+            $state.go("menu");
+          }
+          else
+          {
+            if(data == false)
+            {
+              alert("Matrícula e CPF inválidas");
+            }
+          }
+        }).
+        error(function(data,status,headers,config)
+        {
+          console.log("Error");
+        });
+	}
+
 }])

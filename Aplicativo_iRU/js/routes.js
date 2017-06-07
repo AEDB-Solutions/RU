@@ -70,6 +70,12 @@ angular.module('app.routes', [])
     controller: 'giftCtrl',
     })
 
+  .state('fpassword', {
+    url: '/page10',
+    templateUrl: 'templates/fpassword.html',
+    controller: 'fpasswordCtrl',
+    })
+
 
 $urlRouterProvider.otherwise('/page1')
 
