@@ -34,7 +34,7 @@ while($consulta = mysql_fetch_array($result)) {
 ?>
 
 <ion-view title="Lotação" id="page6" style="">
-	 <ion-content padding="true" class="has-header">
+<ion-content class="has-header" padding="true" style="background: url(img/MeUjzLDyQPSHZmVDWmyb_background20sem20logo.png) no-repeat center;background-size:cover;">
 		<?php	
 			echo "Número de pessoas nos refeitórios do RU: $count";
 		?>
