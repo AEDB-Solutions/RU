@@ -14,6 +14,6 @@
     <div class="spacer" style="width: 290px; height: 20px;"></div>
     <button ui-sref="presente" id="menu-button7" class="button button-positive button-block">Presentear um amigo</button>
     <div class="spacer" style="width: 290px; height: 20px;"></div>
-    <button id="signup-button15" class="button button-positive button-block">Verificar Lotação</button>
+    <button ui-sref="capacidade" id="signup-button15" class="button button-positive button-block">Verificar Lotação</button>
   </ion-content>
 </ion-view>

@@ -6,7 +6,7 @@ $sql = "SELECT ID, Matricula, Horario FROM Entradas";
 $result = mysql_query($sql, $conecta);
 //INICIANDO CONTADOR
 $count = 0;
-
+date_default_timezone_set("Brazil/East");
 while($consulta = mysql_fetch_array($result)) { 
 	$vetor = array(); //VETOR PARA TODOS OS CAMPOS DO BANCO DE DADOS
 	$blz = array(); // VETOR SOMENTE PARA CAMPOS QUE SATISFAÇAM AS CONDIÇÕES NO FINAL DO WHILE
@@ -23,7 +23,7 @@ while($consulta = mysql_fetch_array($result)) {
 	$minutes = $intervalo->format("%I");
 
 	if($days_interval == 0){
-		if($hours == 05){
+		if($hours == 00){
 			if($minutes < 20){ //SUPONDO, POR EXEMPLO, QUE A MÉDIA É 20 MINUTOS
 				$blz[] = $pos;
 				$count = $count + 1;
