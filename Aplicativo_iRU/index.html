@@ -6,7 +6,7 @@
     <title></title>
 
 
-
+<!-- Funções de máscara -->
     <script language = "javascript" type="text/javascript">
     function maskMatricula (campoMatricula){
       var mat = campoMatricula.value;
@@ -24,6 +24,24 @@
         document.forms["login-form"]["matricula2"].value = mat;
         return true;
       }
+    }
+
+    function maskCPF (campoCPF){
+    	var cpf = campoCPF.value;
+    	if(cpf.length == 3){
+    		cpf = cpf + ".";
+    		document.forms["contact-form"]["cpfreg"].value = cpf;
+    	}
+
+    	if(cpf.length == 7){
+    		cpf = cpf + ".";
+    		document.forms["contact-form"]["cpfreg"].value = cpf;
+    	}
+
+    	if(cpf.length == 11){
+    		cpf = cpf + "-";
+    		document.forms["contact-form"]["cpfreg"].value = cpf;
+    	}
     }
     </script>
 
