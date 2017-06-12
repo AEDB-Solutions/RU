@@ -113,38 +113,24 @@ Class Controller {
       echo false;
     }
   }
-
-  function checkCrowd(){
+  function gift($matriculapresente, $qtrefeicoespresente, $mesmasenha){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-    $sql = "SELECT ID, Matricula, Horario FROM Entradas";
-    $result = mysqli_query($sql, $conn);
-    //INICIANDO CONTADOR
-    $count = 0;
-    date_default_timezone_set("Brazil/East");
-    while($consulta = mysql_fetch_array($result)) { 
-      $vetor = array(); //VETOR PARA TODOS OS CAMPOS DO BANCO DE DADOS
-      $blz = array(); // VETOR SOMENTE PARA CAMPOS QUE SATISFAÇAM AS CONDIÇÕES NO FINAL DO WHILE
-      $vetor[] = "$consulta[Horario]"; 
-      $pos = $vetor[0];
-      $date1 = new DateTime();
-      $date2 = new Datetime($pos);
-      $intervalo = $date1->diff($date2);
-      $days_interval = $intervalo->format("%a");
-      $hours = $intervalo->format("%H");
-      $minutes = $intervalo->format("%I");
-      if($days_interval == 0){
-        if($hours == 00){
-          if($minutes < 20){ //SUPONDO, POR EXEMPLO, QUE A MÉDIA É 20 MINUTOS
-            $blz[] = $pos;
-            $count = $count + 1;
-          }
-        }
-      }
-     }
-     echo json_encode($count);
-    }
+    $sql = "INSERT INTO presente (matricula, qntrefeicoes , confirmasenha) VALUES ('$matriculapresente', '$qtrefeicoesgift', '$mesmasenha')";
+    if(mysqli_query($conn, $sql)){
+      echo "Records inserted successfully.";
+    } else{
+      echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    } 
+
+  }
+
+
+
+
+
+
 
 
 }
