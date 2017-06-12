@@ -145,8 +145,11 @@ Class Controller {
      }
      echo json_encode($count);
     }
-  function gift(){
+  function gift($matriculaSender, $matriculaReceiver, $senhaSender, $qtdref){
     /*CONSERTAR*/
+    /*Checar se a matricula e a senha de usuario batem
+    Checar se o emissor tem saldo disponivel para passar (>qtdref)
+    Caso ambas forem verdades, realizar a troca no banco de dados.*/
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
