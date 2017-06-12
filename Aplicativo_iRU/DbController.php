@@ -145,6 +145,27 @@ Class Controller {
      }
      echo json_encode($count);
     }
-
+  function gift(){
+    /*CONSERTAR*/
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $valor;
+    $matriculaSender = "14/0150498";
+    $matriculaReceiver = "13/0018007";
+    $sql = "SELECT Saldo FROM Transferencias WHERE Matricula = '$matriculaSender'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    if($row["Saldo"] < $valor){
+      echo "false";
+      die();
+    }
+    else {
+      $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
+      var_dump(mysqli_query($conn, $sql));
+      $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
+      var_dump(mysqli_query($conn, $sql));
+    }
+  }
 
 }
