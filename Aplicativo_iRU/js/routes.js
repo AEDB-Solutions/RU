@@ -76,6 +76,12 @@ angular.module('app.routes', [])
     controller: 'fpasswordCtrl',
     })
 
+  .state('newpassword', {
+    url: '/page11',
+    templateUrl: 'templates/sendnewpassword.html',
+    controller: 'sendnewpasswordCtrl',
+    })
+
 
 $urlRouterProvider.otherwise('/page1')
 

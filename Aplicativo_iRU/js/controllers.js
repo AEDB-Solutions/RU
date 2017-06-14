@@ -262,7 +262,8 @@ return cboll;
           {
             if(data == false)
             {
-              alert("Matrícula ou senha inválidas");
+              //alert("Matrícula ou senha inválidas");
+              alert(data);
             }
           }
         }).
@@ -349,16 +350,11 @@ function ($scope, $stateParams, $http) {
   }
 }])
 
-.controller('capacityCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('capacityCtrl', function ($scope, $stateParams, $http) { // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http) {
-  $scope.capacidade = function(){
-    $state.go("capacidade");
-  }
-
-  
-}])
+    alert("Testando");
+})
 
 .controller('extratoCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -445,7 +441,7 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 		var gqtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
 		var gpasswordconfirm = document.getElementById("confirmpassword").value;
 		var gift = [gmatricula,gmatriculagift,gqtrefeicoesgift,gpasswordconfirm]
-  		var parameter = JSON.stringify({type:'Presente',matricula:gmatricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gconfirmpassword});
+  		var parameter = JSON.stringify({type:'Presente',matricula:gmatricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gpasswordconfirm});
         	$http.post("presente.php", parameter).
 	        success(function(data,status,headers,config)
 	        {
@@ -457,22 +453,22 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 	          {
 	            if(data == false)
 	            {
-	              alert("Error");
+	              alert(status);
 	            }
 	          }
 	        }).
 	        error(function(data,status,headers,config)
 	        {
-	          console.log(passwordconfirm);
+	          console.log(gpasswordconfirm);
 	        });
 	}
 }])
 
-.controller('fpasswordCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('fpasswordCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', "$state", // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http, $ionicPopup) {
-	$scope.showPopup = function() {
+function ($scope, $stateParams, $http, $ionicPopup, $state) {
+	/*$scope.showPopup = function() {
    $scope.data = {}
 
    // An elaborate, custom popup
@@ -506,32 +502,59 @@ function ($scope, $stateParams, $http, $ionicPopup) {
    		alert("Operação cancelada");
    	}
    });
-  }
-	$scope.forgottenpassword = function ()
+  }*/
+	$scope.fpassword = function ()
 	{
 		var cemail = document.getElementById("emailconfirm").value;
 		var ccpf = document.getElementById("cpfconfirm").value;
-		var confirmdata = [cemail,ccpf]
-		var parameter = JSON.stringify({type:'confirmdata',email:cemail,cpf:ccpf})
-		$http.post("Fpassword.php", parameter).
+		var confirmdata = [cemail,ccpf];
+		var parameter = JSON.stringify({type:'confirmdata',email:cemail,cpf:ccpf});
+		   $http.post("Fpassword.php", parameter).
         success(function(data,status,headers,config)
         {
           if(data == true)
           {
-            $state.go("menu");
+            $state.go("newpassword");
           }
-          else
-          {
-            if(data == false)
-            {
-              alert("Matrícula e CPF inválidas");
-            }
-          }
+          else alert("CPF ou Email invalidos");
         }).
         error(function(data,status,headers,config)
         {
           console.log("Error");
-        });
-	}
-
+        })
+    };
 }])
+
+.controller('sendnewpasswordCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, $http, $ionicPopup, $state) {
+	$scope.sendnewpassword = function ()
+	{
+		var cmatricula = document.getElementById("cmatricula").value;
+		if(npassword.value == cnpassword.value)
+          {
+            newpassword = document.getElementById("npassword").value;
+          }
+          else 
+          {
+            alert("Senhas colocadas são diferentes");
+            return;
+          }
+		  var parameter = JSON.stringify({type:'Users',matricula:cmatricula,password:newpassword})
+        $http.post("Npassword.php", parameter).
+        success(function(data,status,headers,config)
+        {
+          if(data == true)
+          {
+            alert("Sucesso");
+            $state.go("login");
+          }
+          else alert(data);
+        }).
+        error(function(data,status,headers,config)
+        {
+          console.log("Error");
+        })
+    };
+}]);

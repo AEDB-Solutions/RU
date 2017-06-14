@@ -200,7 +200,8 @@ Class Controller {
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-    $sql = "UPDATE Users SET Password = $newpassword WHERE Matricula = '$matricula";
+    $criptografia = hash('sha256', $newpassword);
+    $sql = "UPDATE Users SET Password = '$criptografia' WHERE Matricula = '$matricula'";
     if(mysqli_query($conn, $sql)){
       echo true;
     }
