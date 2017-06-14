@@ -223,7 +223,7 @@ Class Controller {
     
 
   }  
-  function gift($matriculaSender, $matriculaReceiver, $senhaSender, $qtdref){
+  function gift($matriculaSender, $matriculaReceiver,  $qtdref, $senhaSender){
     /*CONSERTAR*/
     /*Checar se a matricula e a senha de usuario batem
     Checar se o emissor tem saldo disponivel para passar (>qtdref)
@@ -231,22 +231,32 @@ Class Controller {
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-    $valor;
-    $matriculaSender = "14/0150498";
-    $matriculaReceiver = "13/0018007";
-    $sql = "SELECT Saldo FROM Transferencias WHERE Matricula = '$matriculaSender'";
+
+    $valor = $qtdref;
+    $sql = "SELECT ID FROM Users WHERE Matricula = '$matriculaSender' and Password = '$senhaSender'";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    if($row["Saldo"] < $valor){
-      echo "false";
-      die();
+    $count = mysqli_num_rows($result);
+    if($count == 1){
+      $sql = "SELECT Saldo FROM Transferencias WHERE Matricula = '$matriculaSender'";
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        if($row["Saldo"] < $valor){
+          echo "false";
+          die();
+        }
+        else {
+          $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
+          if(mysqli_query($conn, $sql)){
+            $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
+            if(mysqli_query($conn, $sql)){
+              echo true;
+            }
+          }
+        }
+
     }
     else {
-      $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
-      var_dump(mysqli_query($conn, $sql));
-      $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
-      var_dump(mysqli_query($conn, $sql));
+      die("matricula e senha diferem!");
     }
-  }
 
 }
