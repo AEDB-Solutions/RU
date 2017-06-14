@@ -195,6 +195,33 @@ Class Controller {
     echo json_encode($contadores);
     }
     
+
+  function newPassword($matricula, $newpassword){
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $sql = "UPDATE Users SET Password = $newpassword WHERE Matricula = '$matricula";
+    if(mysqli_query($conn, $sql)){
+      echo true;
+    }
+    else echo false;
+  }
+
+  function retrievePassword($email, $cpf){
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+
+    $sql = "SELECT ID FROM Users WHERE CPF = '$cpf' and Email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    $count = mysqli_num_rows($result);
+    if($count ==1) {
+      echo true;
+    }
+    else echo false;
+    
+
+  }  
   function gift($matriculaSender, $matriculaReceiver, $senhaSender, $qtdref){
     /*CONSERTAR*/
     /*Checar se a matricula e a senha de usuario batem
