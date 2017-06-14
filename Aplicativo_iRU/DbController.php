@@ -220,8 +220,7 @@ Class Controller {
       echo true;
     }
     else echo false;
-    
-
+  
   }  
   function gift($matriculaSender, $matriculaReceiver,  $qtdref, $senhaSender){
     /*CONSERTAR*/
@@ -233,30 +232,30 @@ Class Controller {
     $conn = $myConnect->conn;
 
     $valor = $qtdref;
-    $sql = "SELECT ID FROM Users WHERE Matricula = '$matriculaSender' and Password = '$senhaSender'";
+    $criptografia = hash('sha256', $senhaSender);
+    $sql = "SELECT ID FROM Users WHERE Matricula = '$matriculaSender' and Password = '$criptografia'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
     if($count == 1){
       $sql = "SELECT Saldo FROM Transferencias WHERE Matricula = '$matriculaSender'";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if($row["Saldo"] < $valor){
-          echo "false";
-          die();
-        }
-        else {
-          $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
+      if($row["Saldo"] < $valor){
+        echo "false";
+        die();
+      }
+      else {
+        $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
+        if(mysqli_query($conn, $sql)){
+          $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
           if(mysqli_query($conn, $sql)){
-            $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
-            if(mysqli_query($conn, $sql)){
-              echo true;
-            }
+            echo true;
           }
         }
-
+      }
     }
     else {
       die("matricula e senha diferem!");
     }
-
+  }
 }

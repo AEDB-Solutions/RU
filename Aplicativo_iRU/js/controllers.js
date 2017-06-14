@@ -255,6 +255,7 @@ return cboll;
         {
           if(data == true)
           {
+            $scope.matricula = ematricula;
             localStorage.setItem("matricula",$scope.matricula);
             $state.go("menu");
           }
@@ -374,6 +375,7 @@ function ($scope, $stateParams, $http) {
 		var parser, xmlDoc;
 		var quantidade = document.getElementById("qtrefeicoes").value;
 		var matricula = $scope.matricula;
+    alert(matricula);
    // matricula = matricula.replace(/\\/g, '');
 		var text = "<checkout>" +
 		  "<currency>BRL</currency>" +
@@ -435,33 +437,29 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 
 	$scope.enviadadosgift = function ()
 	{
-		$scope.matricula = localStorage.getItem("matricula");
-		var gmatricula = $scope.matricula
+    $scope.matricula = localStorage.getItem("matricula");
+    var matricula = $scope.matricula
+    alert(matricula)
 		var gmatriculagift = document.getElementById("matriculagift").value;
 		var gqtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
 		var gpasswordconfirm = document.getElementById("confirmpassword").value;
-		var gift = [gmatricula,gmatriculagift,gqtrefeicoesgift,gpasswordconfirm]
-  		var parameter = JSON.stringify({type:'Presente',matricula:gmatricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gpasswordconfirm});
+		var gift = [$scope.matricula,gmatriculagift,gqtrefeicoesgift,gpasswordconfirm]
+  		var parameter = JSON.stringify({type:'Presente',matricula:matricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gpasswordconfirm});
+      alert(parameter);
         	$http.post("presente.php", parameter).
-	        success(function(data,status,headers,config)
-	        {
-	          if(data == true)
-	          {
-	            alert("Presente enviado com sucesso");
-	          }
-	          else
-	          {
-	            if(data == false)
-	            {
-	              alert(status);
-	            }
-	          }
-	        }).
-	        error(function(data,status,headers,config)
-	        {
-	          console.log(gpasswordconfirm);
-	        });
-	}
+        success(function(data,status,headers,config)
+        {
+          if(data == true)
+          {
+            alert("Presente enviado com sucesso");
+          }
+          else alert(data);
+        }).
+        error(function(data,status,headers,config)
+        {
+          console.log("Error");
+        })
+    };
 }])
 
 .controller('fpasswordCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', "$state", // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
