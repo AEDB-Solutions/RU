@@ -8,7 +8,7 @@
 
 content="text/html; charset=utf-8" />
    
-   <title>Transações</title>
+   <title>QRCode</title>
  
    </head>
  
