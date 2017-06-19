@@ -1,4 +1,4 @@
-<html ng-app="ionicApp">
+                        <html ng-app="ionicApp">
 
 <ion-view title="Extrato" id="page15" style="">
 <ion-content class="has-header" padding="true" style="background: url(img/MeUjzLDyQPSHZmVDWmyb_background20sem20logo.png) no-repeat center;background-size:cover;">
@@ -124,67 +124,29 @@
     table tr:hover td {
       background: #f2f2f2;
       background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
-      background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);  
+      background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
     }
 
     </style>
 
  </head>
 
-  <body ng-controller="MyCtrl as ctrl">
-
-  <!--
-    <ion-header-bar class="bar-stable">
-        <h1 class="title">Service Provider Details</h1>
-    </ion-header-bar>
-    <ion-content>
-        <div class="row header">
-          <div class="col">Data</div>
-          <div class="col">Valor</div>
-        </div>
-        <div class="row" ng-repeat="data in ctrl.data">
-          <div class="col">{{data.data}}</div>
-          <div class="col">{{data.valor}}</div>
-        </div>
-    </ion-content>
-    -->
-<table id="ru_table" cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-
-  <!-- Table Header -->
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Valor</th>
-    </tr>
-  </thead>
-  <!-- Table Header -->
-
-  <!-- Table Body -->
-  <tbody id="tbody">
-    <!-- 
-    <tr>
-      <td>20/05/2017</td>
-      <td>4,50</td>
-    </tr>
-
-    <tr class="even">
-      <td>20/06/201</td>
-      <td>22,50</td>
-    </tr>
-
-    <tr>
-      <td>25/06/201</td>
-      <td>3,30</td>
-    </tr>
-    -->
-
-  </tbody>
-  <!-- Table Body -->
-
-</table>
-
-  </body>
-  </ion-view>
-
-</html>
-
+ <body ng-controller="extratoCtrl">
+   <div ng-controller="extratoCtrl">
+         <table id="ru_table" cellspacing='0'>
+   <thead>
+       <tr>
+         <th>Data</th>
+         <th>Valor</th>
+       </tr>
+     </thead>
+   </head>
+           <tr ng-repeat="dado in dados track by $index">
+               <td>{{dado.data}}</td>
+               <td>{{dado.valor}}</td>
+           </tr>
+ </table>
+  </div>
+   </body>
+   </ion-view>
+ </html>

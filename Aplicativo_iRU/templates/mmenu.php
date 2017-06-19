@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>-->
 <!--- ................................... -->
   <!--  <button ui-sref="extrato" id="menu-button9" class="button button-positive  button-block" ng-click='extrato()'>Checagem de extrato</button> -->
-    <button id="menu-button9" class="button button  button-block" ng-click='extrato()'>Checagem de extrato</button>
+    <button ui-sref="extrato" id="menu-button9" class="button button  button-block" ng-click='extrato()'>Checagem de extrato</button>
     <div class="spacer" style="width: 290px; height: 20px;"></div>
     <button ui-sref="presente" id="menu-button7" class="button button button-block">Presentear um amigo</button>
     <div class="spacer" style="width: 290px; height: 20px;"></div>

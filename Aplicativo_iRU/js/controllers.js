@@ -285,53 +285,7 @@ function ($scope, $stateParams) {
 .controller('menuCtrl', ['$scope','$http','$stateParams','$state',function ($scope,$http,$stateParams,$state){// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-  $scope.extrato = function ()
-  {
-  	$state.go("extrato");
-    $scope.matricula = localStorage.getItem("matricula");
-    var parameter = JSON.stringify({type:'Compras',matricula:$scope.matricula});
-    $http.post("Extrato.php",parameter).
-    success(function(data,status,headers,config)
-    {
-
-      var pp = document.getElementById("tbody");
-      tbody.innerHTML = null;
-      for(var i =0; i < (data.length - 1); i+=2){
-        tbody.innerHTML += '<tr><td>'+data[i]+'</td><td>'+data[i+1]+'</td></tr>';
-      }
-      $state.go("extrato");
-      
-
-      /*$(document).ready(function() {
-      	$('#page15').DataTable({
-      		"processing": true,
-      		"ajax": 
-      		{ 
-      				"url" : "/opt/lampp/htdocs/Aplicativo/iRU/iRU/Aplicativo2/Aplicativo/Extrato.php",
-      				"type": "GET"
-      				dataSrc: '' /*function(json) 
-      				{
-      					var obj = JSON.parse(json);
-      					console.log(obj);
-      					return obj;
-      				}
-      		},
-      		"columns" : [ {
-      			"data" : "Matricula"
-      		}]
-      	});
-      });
-
-      //generatebalancetable(JSON.stringify(data));
-      //$('#extrato').DataTable({
-      	// data:
-      	//}*/
-    }).
-    error(function(data,status,headers,config)
-    {
-      alert('Deu erro');
-    });
-}}])
+}])
 
 .controller('menuadmCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -354,13 +308,19 @@ function ($scope, $stateParams, $http) {
 .controller('capacityCtrl', function ($scope, $stateParams, $http) { // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    alert("Testando");
+
 })
 
-.controller('extratoCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $http) {
+.controller('extratoCtrl', ['$scope', '$stateParams','$http','$state',
+function ($scope, $stateParams, $http, $state) {
+  $scope.dados = [];
+  $scope.matricula = localStorage.getItem("matricula");
+  var parameter = JSON.stringify({type:'Compras',matricula:$scope.matricula});
+    $http.post("Extrato.php",parameter).success(function(dados,status,headers,config)
+    {
+        $scope.dados = dados;
+        $state.go("extrato");
+    });
 }])
 
 .controller('dadosCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

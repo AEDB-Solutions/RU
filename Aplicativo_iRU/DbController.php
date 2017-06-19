@@ -59,13 +59,15 @@ Class Controller {
     $myConnect->Connect();
     $conn = $myConnect->conn;
     $sql = "SELECT Data, Valor FROM Compras WHERE Matricula = '$matricula'";
+    $final=array();
     if($result = mysqli_query($conn,$sql)) {
         $send = array();
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            array_push($send, $row["Data"]);
-            array_push($send, $row["Valor"]);
+            $send["data"] = $row["Data"];
+            $send["valor"] = $row["Valor"];
+            array_push($final,$send);
           }
-        echo json_encode($send);
+        echo json_encode($final);
       }
       else {
          echo false;
