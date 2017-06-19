@@ -8,7 +8,7 @@
 
 content="text/html; charset=utf-8" />
    
-   <title>QRCode</title>
+   <title>QrCode</title>
  
    </head>
  
@@ -24,7 +24,7 @@ require("/phpqrcode/qrlib.php");
 $cv  = $_POST['matricula'];
 
 //Gerando a imagem com a classe QRcode
-QRCode::png($cv, 'img_php/' .$cv.'.png', QR_ECLEVEL_H);
+QRCode::png($cv, 'img_php/' .$cv.'.png', QR_ECLEVEL_H, 4);
  
 //Mostrando a imagem gerada.
 echo '<img src="img_php/' .$cv.'.png" />';
