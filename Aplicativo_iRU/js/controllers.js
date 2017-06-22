@@ -499,7 +499,7 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
             alert("Senhas colocadas são diferentes");
             return;
           }
-		  var parameter = JSON.stringify({type:'Users',matricula:cmatricula,password:newpassword})
+		var parameter = JSON.stringify({type:'Users',matricula:cmatricula,password:newpassword})
         $http.post("Npassword.php", parameter).
         success(function(data,status,headers,config)
         {
@@ -521,4 +521,67 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
-});
+})
+
+.controller('parmapCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, $http, $ionicPopup, $state) {
+  $scope.inputs = [];
+  $scope.inputs2 = [];
+  $scope.inputs3 = [];
+
+  $scope.addfield=function()
+  {
+    $scope.inputs.push({}) 
+    $scope.teste = true;
+  }
+
+    $scope.addfield2=function()
+  {
+    $scope.inputs2.push({}) 
+    $scope.teste2 = true;
+  }
+
+   $scope.addfield3=function()
+  {
+    $scope.inputs3.push({}) 
+    $scope.teste3 = true;
+  }
+
+  $scope.sendpoints = function ()
+  {
+  	var pontopartida = document.getElementById("PP").value;
+  	var horariosaida = document.getElementById("HS").value;
+  	var tempofila = document.getElementById("TF").value;
+  	if (document.getElementById("PE") == null)
+  		{
+  			pontopassagem = 0;
+  		}
+  	else pontopassagem = document.getElementById("PE").value;
+  	if (document.getElementById("PE2") == null)
+  		{
+  			pontopassagem2 = 0;
+  			//alert ("testandoessacaralhuda");  
+  		}
+  	else pontopassagem2 = document.getElementById("PE2").value;
+  	if (document.getElementById("PE3") == null)
+  		{
+  			pontopassagem3 = 0;
+  		}
+  	else pontopassagem3 = document.getElementById("PE3").value;
+  	var testandoessacaralhuda = [pontopartida,horariosaida,tempofila,pontopassagem,pontopassagem2,pontopassagem3];
+  	console.log(testandoessacaralhuda);
+	var parameter = JSON.stringify({type:'Distancias',Origem:pontopartida,Horario:horariosaida,Tempo:tempofila,Destino:pontopassagem,Destino2:pontopassagem2,Destino3:pontopassagem3})
+        $http.post("maps.php", parameter).
+        success(function(data,status,headers,config)
+        {
+           var url = data;
+           $state.go("maps");
+        }).
+        error(function(data,status,headers,config)
+        {
+          console.log("Error");
+        })
+  }
+}])

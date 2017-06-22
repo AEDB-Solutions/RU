@@ -17,6 +17,6 @@
     <div class="spacer" style="width: 290px; height: 20px;"></div>
     <button ui-sref="capacidade" id="signup-button15" class="button button button-block">Verificar Lotação</button>
     <div class="spacer" style="width: 290px; height: 20px;"></div>
-    <button ui-sref="maps" id="signup-button15" class="button button button-block">Mapa</button>
+    <button ui-sref="parmaps" id="signup-button15" class="button button button-block">Mapa</button>
   </ion-content>
 </ion-view>

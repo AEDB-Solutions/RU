@@ -81,10 +81,17 @@ angular.module('app.routes', [])
     templateUrl: 'templates/sendnewpassword.html',
     controller: 'sendnewpasswordCtrl',
     })
+
   .state('maps', {
-    url: '/page12',
+    url: '/page13',
     templateUrl: 'templates/mapa.html',
     controller: 'mapCtrl',
+    })
+
+  .state('parmaps', {
+    url: '/page12',
+    templateUrl: 'templates/parmap.html',
+    controller: 'parmapCtrl',
     })
 
 $urlRouterProvider.otherwise('/page1')

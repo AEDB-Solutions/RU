@@ -1,0 +1,121 @@
+<ion-view title="Dados do Mapa" id="page30" style="background-color: rgb(237, 8, 58);">
+  <ion-content class="has-header" padding="true" style="background: url(img/MeUjzLDyQPSHZmVDWmyb_background20sem20logo.png) no-repeat center;background-size:cover;">
+    <div class="spacer" style="width: 290px; height: 30px;"></div>
+    <label class="item item-input">
+     <span class="input-label">Ponto de partida: </span>
+      <select class="ion-input-select--large" id="PP">
+          <option>RU</option>
+          <option>FT</option>
+          <option>ICC NORTE</option>
+          <option>ICC SUL</option>
+          <option>BSAS</option>
+          <option>BASN</option>
+          <option>BCE</option>
+          <option>REITORIA</option>
+          <option>FD</option>
+          <option>FS</option>
+          <option>IQ</option>
+          <option>CIC</option>
+          <option>PJC</option>
+          <option>PAT</option>
+          <option>SG11</option>
+          <option>SG12</option>
+          <option>IDA</option>
+      </select>
+    </label>
+       <div class="spacer" style="width: 290px; height: 25px;"></div>
+    <label class="item item-input">
+      <span class="input-label">Horário de partida: </span>
+      <input placeholder="RU fica aberto de 11h até as 14h (EX)" type="text" maxlength="50" id="HS">
+    </label>
+    <div class="spacer" style="width: 290px; height: 25px;"></div>
+    <label class="item item-input">
+      <span class="input-label">Tempo de fila: </span>
+      <input placeholder="Quanto tempo deseja ficar na fila (minutos)" type="text" maxlength="50" id="TF">
+    </label>
+    <div class="spacer" style="width: 290px; height: 25px;"></div>
+     <div class="addcontend">
+       <div ng-repeat="item in inputs">
+        <label class="item item-input">
+     <span class="input-label">Ponto possível para passagem: </span>
+      <select class="ion-input-select--large" id="PE">
+          <option>RU</option>
+          <option>FT</option>
+          <option>ICC NORTE</option>
+          <option>ICC SUL</option>
+          <option>BSAS</option>
+          <option>BASN</option>
+          <option>BCE</option>
+          <option>REITORIA</option>
+          <option>FD</option>
+          <option>FS</option>
+          <option>IQ</option>
+          <option>CIC</option>
+          <option>PJC</option>
+          <option>PAT</option>
+          <option>SG11</option>
+          <option>SG12</option>
+          <option>IDA</option>
+      </select>
+    </label>
+       </div>
+      </div>
+     <div class="addcontend2">
+       <div ng-repeat="item in inputs2">
+        <label class="item item-input">
+     <span class="input-label">Ponto possível para passagem: </span>
+      <select class="ion-input-select--large" id="PE2">
+          <option>RU</option>
+          <option>FT</option>
+          <option>ICC NORTE</option>
+          <option>ICC SUL</option>
+          <option>BSAS</option>
+          <option>BASN</option>
+          <option>BCE</option>
+          <option>REITORIA</option>
+          <option>FD</option>
+          <option>FS</option>
+          <option>IQ</option>
+          <option>CIC</option>
+          <option>PJC</option>
+          <option>PAT</option>
+          <option>SG11</option>
+          <option>SG12</option>
+          <option>IDA</option>
+      </select>
+    </label>
+       </div>
+      </div>
+      <div class="addcontend3">
+       <div ng-repeat="item in inputs3">
+        <label class="item item-input">
+     <span class="input-label">Ponto possível para passagem: </span>
+      <select class="ion-input-select--large" id="PE3">
+          <option>RU</option>
+          <option>FT</option>
+          <option>ICC NORTE</option>
+          <option>ICC SUL</option>
+          <option>BSAS</option>
+          <option>BASN</option>
+          <option>BCE</option>
+          <option>REITORIA</option>
+          <option>FD</option>
+          <option>FS</option>
+          <option>IQ</option>
+          <option>CIC</option>
+          <option>PJC</option>
+          <option>PAT</option>
+          <option>SG11</option>
+          <option>SG12</option>
+          <option>IDA</option>
+      </select>
+    </label>
+       </div>
+      </div>
+      <b class="button button-stable button-block" ng-click='addfield()' ng-hide="teste">Adicionar novo ponto</b>
+      <b class="button button-stable button-block" ng-click='addfield2()' ng-hide="teste2">Adicionar novo ponto</b>
+      <b class="button button-stable button-block" ng-click='addfield3()' ng-hide="teste3">Adicionar novo ponto</b>
+      <div class="spacer" style="width :290px; height: 35px;"></div>
+      <b class="button button-stable button-block" ng-click='sendpoints()'>Vamos!</b>
+  </ion-content>
+</ion-view>
