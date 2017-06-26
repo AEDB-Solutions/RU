@@ -1362,3 +1362,51 @@
 ) 
 {2017/06/05 17:27:02} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-06T17:27:02, finalDate=2017-06-05T17:27:02) - begin 
 {2017/06/05 17:27:02} [Error] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-06T17:27:02, finalDate=2017-06-05T17:27:02) - end [HTTP 401] - UNAUTHORIZED  
+{2017/06/26 15:25:34} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:25:34, finalDate=2017-06-26T15:25:34) - begin 
+{2017/06/26 15:25:37} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:25:34, finalDate=2017-06-26T15:25:34) - end PagSeguroSearchResult: array (
+  'Date' => '2017-06-26T15:25:37.000-03:00',
+  'CurrentPage' => '1',
+  'TotalPages' => '1',
+  'Results in this page' => '1',
+) 
+{2017/06/26 15:25:37} [Info] PagSeguroTransactionSearchService.SearchByCode(75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - begin 
+{2017/06/26 15:25:39} [Info] PagSeguroTransactionSearchService.SearchByCode(transactionCode=75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - end Transaction: array (
+  'code' => '75B0D1B8-3406-4A4C-B7CD-D8133A66C73C',
+  'email' => 'bamidele.lucas@gmail.com',
+  'date' => '2017-05-31T13:56:52.000-03:00',
+  'reference' => '14/0150498',
+  'status' => '3',
+  'itemsCount' => 1,
+) 
+{2017/06/26 15:25:39} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:25:34, finalDate=2017-06-26T15:25:34) - begin 
+{2017/06/26 15:25:42} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:25:34, finalDate=2017-06-26T15:25:34) - end PagSeguroSearchResult: array (
+  'Date' => '2017-06-26T15:25:42.000-03:00',
+  'CurrentPage' => '1',
+  'TotalPages' => '1',
+  'Results in this page' => '1',
+) 
+{2017/06/26 15:25:42} [Info] PagSeguroTransactionSearchService.SearchByCode(75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - begin 
+{2017/06/26 15:25:45} [Info] PagSeguroTransactionSearchService.SearchByCode(transactionCode=75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - end Transaction: array (
+  'code' => '75B0D1B8-3406-4A4C-B7CD-D8133A66C73C',
+  'email' => 'bamidele.lucas@gmail.com',
+  'date' => '2017-05-31T13:56:52.000-03:00',
+  'reference' => '14/0150498',
+  'status' => '3',
+  'itemsCount' => 1,
+) 
+{2017/06/26 15:26:36} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:26:36, finalDate=2017-06-26T15:26:36) - begin 
+{2017/06/26 15:26:38} [Info] PagSeguroTransactionSearchService.SearchByDate(initialDate=2017-05-27T15:26:36, finalDate=2017-06-26T15:26:36) - end PagSeguroSearchResult: array (
+  'Date' => '2017-06-26T15:26:38.000-03:00',
+  'CurrentPage' => '1',
+  'TotalPages' => '1',
+  'Results in this page' => '1',
+) 
+{2017/06/26 15:26:38} [Info] PagSeguroTransactionSearchService.SearchByCode(75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - begin 
+{2017/06/26 15:26:41} [Info] PagSeguroTransactionSearchService.SearchByCode(transactionCode=75B0D1B8-3406-4A4C-B7CD-D8133A66C73C) - end Transaction: array (
+  'code' => '75B0D1B8-3406-4A4C-B7CD-D8133A66C73C',
+  'email' => 'bamidele.lucas@gmail.com',
+  'date' => '2017-05-31T13:56:52.000-03:00',
+  'reference' => '14/0150498',
+  'status' => '3',
+  'itemsCount' => 1,
+) 
