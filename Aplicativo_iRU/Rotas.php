@@ -2,9 +2,14 @@
 include("connectDB.php");
 include("gaussiana.php");
 $meuobjeto = json_decode(file_get_contents('php://input'));
+$nodes = array($meuobjeto->Destino, $meuobjeto->Destino2, $meuobjeto->Destino3);
+$root = $meuobjeto->Origem;
+$tempoMax = $meuobjeto->Tempo;
+$horaAtual = $meuobjeto->Horario;
 //echo getTime($meuobjeto->partida, $meuobjeto->nodes, $meuobjeto->horaDePartida, $meuobjeto->tempoMax);
-$nodes = array("REITORIA", "BCE", "ICC NORTE", "ICC SUL",);
-echo createURL("FT", $nodes);
+$order = getTime($root, $nodes, $horaAtual, $tempoMax);
+
+echo createURL("FT", $order);
 //print_r(getTime("FT", $nodes, 12, 15));
 
 
@@ -13,8 +18,9 @@ function getTime($root, $nodes, $horaAtual, $tempoMax){
 	//$horaAtual = 12;
 	$hora = $horaAtual + getTimeFromPoint($root, "RU");
 	$menorTempo = $gaus->getTimeInQueue($hora);
+	$myarray = array();
 	if($menorTempo < $tempoMax){
-		return "vai pro RU";
+		return array_push($myarray, $root);
 	}
 	$myarray = array();
 	$firstTerm = $nodes[0];
@@ -27,14 +33,14 @@ function getTime($root, $nodes, $horaAtual, $tempoMax){
 				$hora += getTimeFromPoint($root, $nodes[$i]);
 				$go = $hora + getTimeFromPoint($nodes[$i], "RU");
 				$tempo = $gaus->getTimeInQueue($go);
-				echo "hora: " . $hora . "<br>";
-				echo "go: " . $go . "<br>";
-				echo "tempo: " . $tempo . "<br>";
+			//	echo "hora: " . $hora . "<br>";
+		//		echo "go: " . $go . "<br>";
+	//			echo "tempo: " . $tempo . "<br>";
 				array_push($myarray, $nodes[$i]);
 				if($tempo < $tempoMax){
 					$min = ($hora - floor($hora))*60;
-					echo "<br><br>" . $min . "<br><br>";
-					array_push($myarray, $tempo);
+	//				echo "<br><br>" . $min . "<br><br>";
+					//array_push($myarray, $tempo);
 					return $myarray;
 				}
 				else if($tempo < $menorTempo){
@@ -45,14 +51,14 @@ function getTime($root, $nodes, $horaAtual, $tempoMax){
 				$hora += getTimeFromPoint($nodes[$i-1], $nodes[$i]);
 				$go = $hora + getTimeFromPoint($nodes[$i], "RU");
 				$tempo = $gaus->getTimeInQueue($go);
-				echo "hora: " . $hora . "<br>";
-				echo "go: " . $go . "<br>";
-				echo "tempo: " . $tempo . "<br>";
+		//		echo "hora: " . $hora . "<br>";
+		//		echo "go: " . $go . "<br>";
+		//		echo "tempo: " . $tempo . "<br>";
 				array_push($myarray, $nodes[$i]);
 				if($tempo < $tempoMax){
 					$min = ($hora - floor($hora))*60;
-					echo "<br><br>" . $min . "<br><br>";
-					array_push($myarray, $tempo);
+		//			echo "<br><br>" . $min . "<br><br>";
+				//	array_push($myarray, $tempo);
 					return $myarray;
 				}
 				else if($tempo < $menorTempo){
@@ -78,14 +84,12 @@ function createURL($root, $array){
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	$origin = "&origin=" . $row["Latitude"] . "," . $row["Longitude"];
 	$url = "https://www.google.com/maps/embed/v1/directions?&key=AIzaSyCNzgbxhYdfFp2T-1V6x7tJ9-xMKvkQZ1s&units=metric&mode=walking" . $origin; 
-	echo $url . "<br>";
 	$ru = "RU";
 	$sql = "SELECT * FROM Locais WHERE Local = '$ru'";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	$destination = "&destination=" . $row["Latitude"] . "," . $row["Longitude"];
 	$url .= $destination;
-	echo $url . "<br>";
 	if(count($array) > 0){
 		$waypoints = "&waypoints=";
 		foreach ($array as $key => $value) {
