@@ -13,6 +13,5 @@ class ConnectDB {
 	    if (!$this->conn) {
 	        die("Connection failed: " . mysqli_connect_error());
 	    }
-        session_start();
 	}
 }

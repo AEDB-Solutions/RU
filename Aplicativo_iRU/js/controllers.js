@@ -520,7 +520,8 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 .controller('mapCtrl', function ($scope, $stateParams, $http) { // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-
+	$scope.url = localStorage.getItem("url");
+	$scope.teste = $scope.url;
 })
 
 .controller('parmapCtrl', ['$scope', '$stateParams', '$http', '$ionicPopup', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -552,31 +553,34 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
   $scope.sendpoints = function ()
   {
   	var pontopartida = document.getElementById("PP").value;
-  	var horariosaida = document.getElementById("HS").value;
+  	var horasaida = document.getElementById("HP").value;
+  	var secsaida = document.getElementById("SP").value;
   	var tempofila = document.getElementById("TF").value;
   	if (document.getElementById("PE") == null)
   		{
-  			pontopassagem = 0;
+  			pontopassagem = null;
   		}
   	else pontopassagem = document.getElementById("PE").value;
   	if (document.getElementById("PE2") == null)
   		{
-  			pontopassagem2 = 0;
+  			pontopassagem2 = null;
   			//alert ("testandoessacaralhuda");  
   		}
   	else pontopassagem2 = document.getElementById("PE2").value;
   	if (document.getElementById("PE3") == null)
   		{
-  			pontopassagem3 = 0;
+  			pontopassagem3 = null;
   		}
   	else pontopassagem3 = document.getElementById("PE3").value;
-  	var testandoessacaralhuda = [pontopartida,horariosaida,tempofila,pontopassagem,pontopassagem2,pontopassagem3];
-  	console.log(testandoessacaralhuda);
-	var parameter = JSON.stringify({type:'Distancias',Origem:pontopartida,Horario:horariosaida,Tempo:tempofila,Destino:pontopassagem,Destino2:pontopassagem2,Destino3:pontopassagem3})
-        $http.post("maps.php", parameter).
+  	//var testandoessacaralhuda = [pontopartida,horariosaida,tempofila,pontopassagem,pontopassagem2,pontopassagem3];
+  	//console.log(testandoessacaralhuda);
+  	var sendTime = parseFloat(horasaida) + parseFloat(secsaida)/60;
+	var parameter = JSON.stringify({type:'Distancias',Origem:pontopartida,Horario:sendTime,Tempo:tempofila,Destino:pontopassagem,Destino2:pontopassagem2,Destino3:pontopassagem3})
+        $http.post("Rotas.php", parameter).
         success(function(data,status,headers,config)
         {
-           var url = data;
+           $scope.url = data;
+           localStorage.setItem("url",$scope.url);
            $state.go("maps");
         }).
         error(function(data,status,headers,config)
@@ -585,3 +589,20 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
         })
   }
 }])
+
+.controller('QRCCtrl', function ($scope, $stateParams, $http) { // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+	$scope.matricula = localStorage.getItem("matricula");
+	var matricula = $scope.matricula;
+	var parameter = JSON.stringify({type:'QRCode',Matricula:matricula})
+		$http.post("testeQR.php",parameter).
+		success(function(data,status,headers,config)
+		{
+			alert(data);
+		}).
+		error(function(data,status,headers,config)
+		{
+			alert("Error");
+		})
+})

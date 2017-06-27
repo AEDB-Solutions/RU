@@ -8,7 +8,6 @@ $tempoMax = $meuobjeto->Tempo;
 $horaAtual = $meuobjeto->Horario;
 //echo getTime($meuobjeto->partida, $meuobjeto->nodes, $meuobjeto->horaDePartida, $meuobjeto->tempoMax);
 $order = getTime($root, $nodes, $horaAtual, $tempoMax);
-
 echo createURL("FT", $order);
 //print_r(getTime("FT", $nodes, 12, 15));
 
@@ -20,9 +19,8 @@ function getTime($root, $nodes, $horaAtual, $tempoMax){
 	$menorTempo = $gaus->getTimeInQueue($hora);
 	$myarray = array();
 	if($menorTempo < $tempoMax){
-		return array_push($myarray, $root);
+		return null;
 	}
-	$myarray = array();
 	$firstTerm = $nodes[0];
 	$value = "";
 	$iteration = 0;
@@ -75,7 +73,7 @@ function getTime($root, $nodes, $horaAtual, $tempoMax){
 	return $myarray;
 }
 
-function createURL($root, $array){
+function createURL($root, $myarray){
 	$myConnect = new ConnectDB();
 	$myConnect->Connect();
 	$conn = $myConnect->conn;
@@ -90,9 +88,10 @@ function createURL($root, $array){
 	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	$destination = "&destination=" . $row["Latitude"] . "," . $row["Longitude"];
 	$url .= $destination;
-	if(count($array) > 0){
+	//echo count($myarray);
+	if(count($myarray) > 0){
 		$waypoints = "&waypoints=";
-		foreach ($array as $key => $value) {
+		foreach ($myarray as $key => $value) {
 			if($key > 0){
 				$waypoints .= "|";
 			}

@@ -94,6 +94,11 @@ angular.module('app.routes', [])
     controller: 'parmapCtrl',
     })
 
+  .state('QRCode', {
+    url: '/page14',
+    templateUrl: 'templates/QRC.html',
+    controller: 'QRCCtrl',
+    })
 $urlRouterProvider.otherwise('/page1')
 
 

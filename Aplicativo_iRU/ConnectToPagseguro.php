@@ -2,7 +2,7 @@
 require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 class ConnectToPagseguro{
     private $email = "ruonlineunb@gmail.com";
-    private $token = "F78922383DA842219506320C03CF71B8";
+    private $token = "A173387059844BB78C15679EBAB67B84";
 	function connectDate($initialDate, $finalDate){
 		$pageNumber = 1;
         $maxPageResults = 20;
