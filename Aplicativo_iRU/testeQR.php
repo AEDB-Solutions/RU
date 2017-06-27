@@ -1,14 +1,11 @@
 <?php
 require("phpqrcode/qrlib.php");
-//$meuObjeto = json_decode(file_get_contents("php://input"));
-//echo getImage($meuObjeto->matricula);]
-echo getImage("14/0150498");
-
+$meuObjeto = json_decode(file_get_contents("php://input"));
+getImage($meuObjeto->Matricula);
+echo removeSlash($meuObjeto->Matricula);
 function getImage($matricula){
-$matricula = removeSlash($matricula);
-QRCode::png($matricula, 'img_qrcodes/' . $matricula.'.png', QR_ECLEVEL_H, 4);
-//Mostrando a imagem gerada.
-return '<img src="img_qrcodes/' . $matricula .'.png" />';
+	$matricula = removeSlash($matricula);
+	QRCode::png($matricula, 'img_qrcodes/' . $matricula.'.png', QR_ECLEVEL_H, 4);
 }
 
 

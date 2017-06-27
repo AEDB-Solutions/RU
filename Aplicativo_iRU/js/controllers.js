@@ -599,7 +599,8 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 		$http.post("testeQR.php",parameter).
 		success(function(data,status,headers,config)
 		{
-			alert(data);
+      alert(data);
+      $scope.myImg = "img_qrcodes/" + data + ".png";
 		}).
 		error(function(data,status,headers,config)
 		{
