@@ -233,4 +233,17 @@ Class Controller {
 
       }
 
+    function saldo($matricula){
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $sql = "SELECT sum(Valor) FROM Compras WHERE Matricula = '$matricula'";
+    $rs = mysqli_query($conn, $sql);
+      if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
+    $row = mysqli_fetch_row($rs);
+    $sum= $row[0];
+    //print "Seu saldo total é R$: $sum";
+    //echo json_encode($sum);
+    echo $sum;
+  }
 }
