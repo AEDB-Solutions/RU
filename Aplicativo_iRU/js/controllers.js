@@ -167,7 +167,8 @@ return cboll;
             rpassword = document.getElementById("passWord").value;
           }
           else {
-            alert("Senhas colocadas são diferentes");
+            caixa_password.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Senhas diferentes</div>";
+            caixa_password.style.display = 'block';
             return;
           }
         }
@@ -356,7 +357,7 @@ function ($scope, $stateParams, $http) {
 		"</checkout>";
     alert(text);
 		$http
-		({ 
+		({
     		method: 'POST',
     		url: myurl,
     		data: text,
@@ -494,7 +495,7 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
           {
             newpassword = document.getElementById("npassword").value;
           }
-          else 
+          else
           {
             alert("Senhas colocadas são diferentes");
             return;
@@ -534,19 +535,19 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 
   $scope.addfield=function()
   {
-    $scope.inputs.push({}) 
+    $scope.inputs.push({})
     $scope.teste = true;
   }
 
     $scope.addfield2=function()
   {
-    $scope.inputs2.push({}) 
+    $scope.inputs2.push({})
     $scope.teste2 = true;
   }
 
    $scope.addfield3=function()
   {
-    $scope.inputs3.push({}) 
+    $scope.inputs3.push({})
     $scope.teste3 = true;
   }
 
@@ -564,7 +565,7 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
   	if (document.getElementById("PE2") == null)
   		{
   			pontopassagem2 = null;
-  			//alert ("testandoessacaralhuda");  
+  			//alert ("testandoessacaralhuda");
   		}
   	else pontopassagem2 = document.getElementById("PE2").value;
   	if (document.getElementById("PE3") == null)
