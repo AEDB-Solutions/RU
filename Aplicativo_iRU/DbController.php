@@ -3,7 +3,7 @@ include ('connectDB.php');
 include ('OperationController.php');
 require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 Class Controller {
-	function check($matricula, $senha){
+  function check($matricula, $senha){
      $myConnect = new ConnectDB();
      $myConnect->Connect();
      $conn = $myConnect->conn;
@@ -26,20 +26,19 @@ Class Controller {
       //    return false;
    }
    }
-
    function registrar($username, $matricula, $email, $password, $CPF, $gender, $age, $curso){
-		$myConnect = new ConnectDB();
-		$myConnect->Connect();
-		$conn = $myConnect->conn;
-		$criptografia = hash('sha256',$password);
-		//$criptografiaprabotapafuder = hash('sha256',$criptografia); Se quiser usar essa outra função,seria a criptografia da criptografia.
-		$sql = "INSERT INTO Users (Username, Matricula, Email, Password, CPF, Gender, Age, Curso) VALUES ('$username', '$matricula', '$email', '$criptografia', '$CPF', '$gender', '$age', '$curso')";
-		if(mysqli_query($conn, $sql)){
-			echo "Records inserted successfully.";
-		} else{
-			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-		}
-	}
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $criptografia = hash('sha256',$password);
+    //$criptografiaprabotapafuder = hash('sha256',$criptografia); Se quiser usar essa outra função,seria a criptografia da criptografia.
+    $sql = "INSERT INTO Users (Username, Matricula, Email, Password, CPF, Gender, Age, Curso) VALUES ('$username', '$matricula', '$email', '$criptografia', '$CPF', '$gender', '$age', '$curso')";
+    if(mysqli_query($conn, $sql)){
+      echo "Records inserted successfully.";
+    } else{
+      echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    }
+  }
   function checkUserCredit($matricula){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
@@ -60,21 +59,41 @@ Class Controller {
     $conn = $myConnect->conn;
     $sql = "SELECT Data, Valor FROM Compras WHERE Matricula = '$matricula'";
     $final=array();
+    $send = array();
     if($result = mysqli_query($conn,$sql)) {
-        $send = array();
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
             $send["data"] = $row["Data"];
             $send["valor"] = $row["Valor"];
             array_push($final,$send);
           }
+        $sql = "SELECT Data, valor FROM Presentes WHERE Remetente = '$matricula'";
+        if($result = mysqli_query($conn, $sql)){
+          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            array_push($final,$send);
+          }
+        }
+        $sql = "SELECT Data, valor FROM Presentes WHERE Destinatario = '$matricula'";
+        if($result = mysqli_query($conn, $sql)){
+          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $send["data"] = $row["Data"];
+            $send["valor"] = $row["valor"];
+            array_push($final,$send);
+          }
+        }
+        $sql = "SELECT * FROM Entrada WHERE Matricula = '$matricula'";
+        if($result = mysqli_query($conn, $sql)){
+          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $send["data"] = $row["Data"];
+            $send["valor"] =  -2.5;
+            array_push($final,$send);
+          }
+        }
         echo json_encode($final);
       }
       else {
          echo false;
       }
   }
-
-
   function checkTransactionHistory(){
     //this->addDataToOurDB();
     $myConnect = new ConnectDB();
@@ -95,19 +114,28 @@ Class Controller {
       echo false;
     }
   }
-
 function saldo($matricula){
-	$myConnect = new ConnectDB();
-	$myConnect->Connect();
-	$conn = $myConnect->conn;
-	$sql = "SELECT sum(Valor) FROM Compras WHERE Matricula = '$matricula'";
-	$rs = mysqli_query($conn, $sql);
-		if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
-	$row = mysqli_fetch_row($rs);
-	$sum= $row[0];
-	echo $sum;
+  $sum;
+  $myConnect = new ConnectDB();
+  $myConnect->Connect();
+  $conn = $myConnect->conn;
+  $sql = "SELECT sum(Valor) FROM Compras WHERE Matricula = '$matricula'";
+  $rs = mysqli_query($conn, $sql);
+  if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
+  $row = mysqli_fetch_row($rs);
+  $sum = $row[0];
+  $sql = "SELECT sum(valor) FROM Presentes WHERE Destinatario = '$matricula'";
+  $rs = mysqli_query($conn, $sql);
+  if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
+  $row = mysqli_fetch_row($rs);
+  $sum += $row[0];
+  $sql = "SELECT sum(valor) FROM Presentes WHERE Remetente = '$matricula'";
+  $rs = mysqli_query($conn, $sql);
+  if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
+  $row = mysqli_fetch_row($rs);
+  $sum -= $row[0];
+  return $sum;
 }
-
   function getNumberOfPeople(){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
@@ -128,7 +156,6 @@ function saldo($matricula){
       echo false;
     }
   }
-
   function checkCrowd(){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
@@ -154,13 +181,10 @@ function saldo($matricula){
       $pos1 = $refeitorio[0];
       $date1 = new DateTime();
       $date2 = new Datetime($pos);
-
       $intervalo = $date1->diff($date2);
-
       $days_interval = $intervalo->format("%a");
       $hours = $intervalo->format("%H");
       $minutes = $intervalo->format("%I");
-
       if($days_interval == 0){
         if($hours == 00){
           if($minutes < 20){ //SUPONDO, POR EXEMPLO, QUE A MÉDIA É 20 MINUTOS
@@ -210,7 +234,6 @@ function saldo($matricula){
     echo json_encode($contadores);
     }
     
-
   function newPassword($matricula, $newpassword){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
@@ -222,12 +245,10 @@ function saldo($matricula){
     }
     else echo false;
   }
-
   function retrievePassword($email, $cpf){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-
     $sql = "SELECT ID FROM Users WHERE CPF = '$cpf' and Email = '$email'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
@@ -245,27 +266,21 @@ function saldo($matricula){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
     $conn = $myConnect->conn;
-
-    $valor = $qtdref;
+    $valor = $qtdref*2.5;
     $criptografia = hash('sha256', $senhaSender);
     $sql = "SELECT ID FROM Users WHERE Matricula = '$matriculaSender' and Password = '$criptografia'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
-    if($count == 1){
-      $sql = "SELECT Saldo FROM Transferencias WHERE Matricula = '$matriculaSender'";
-      $result = mysqli_query($conn, $sql);
-      $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-      if($row["Saldo"] < $valor){
+    if($count == 1){    
+     $sum = $this->saldo($matriculaSender);
+      if($sum < $valor){
         echo "false";
         die();
       }
       else {
-        $sql = "UPDATE Transferencias SET Saldo = Saldo + $valor WHERE Matricula = '$matriculaReceiver'";
+        $sql = "INSERT INTO Presentes (Remetente, Destinatario, valor) VALUES ('$matriculaSender', '$matriculaReceiver', '$valor')";
         if(mysqli_query($conn, $sql)){
-          $sql = "UPDATE Transferencias SET Saldo = Saldo - $valor WHERE Matricula = '$matriculaSender'";
-          if(mysqli_query($conn, $sql)){
             echo true;
-          }
         }
       }
     }
