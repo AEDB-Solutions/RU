@@ -290,10 +290,33 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('menuCtrl', ['$scope','$http','$stateParams','$state',function ($scope,$http,$stateParams,$state){// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('menuCtrl', function ($scope, $stateParams, $http) { // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-}])
+$scope.matricula = localStorage.getItem("matricula");
+	var matricula = $scope.matricula;
+	var parameter = JSON.stringify({type:'Saldo',matricula:matricula})
+	var parameters = JSON.stringify({type:'Name',Matricula:matricula})
+		$http.post("saldo.php",parameter).
+		success(function(data,status,headers,config)
+		{
+      		$scope.mySaldo = data;
+		}).
+		error(function(data,status,headers,config)
+		{
+			alert("Erro na conexão");
+		})
+
+		$http.post("GetName.php",parameters).
+		success(function(data,status,headers,config)
+		{
+      		$scope.myName = data;
+		}).
+		error(function(data,status,headers,config)
+		{
+			alert("Erro na conexão2");
+		})
+})
 
 .controller('menuadmCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function

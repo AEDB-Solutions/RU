@@ -5,6 +5,15 @@
 	<!--<input type="hidden" name="itemCode" value="9F9FA85EFCFCF34EE478BF8DB1612947" />
 	<input type="hidden" name="iot" value="button" />-->
    <div class="spacer" style="width: 290px; height: 10px;"></div>
+   <ion-card>
+  <ion-card-header>
+    Olá  {{myName}} 
+  </ion-card-header>
+  <ion-card-content>
+    seu saldo atual é de: "{{mySaldo}}" 
+  </ion-card-content>
+</ion-card>
+    <div class="spacer" style="width: 290px; height: 10px;"></div>
 	<button  ui-sref="dados" id="menu-button8" class="button button button-block">Comprar Refeições</button>
   <div class="spacer" style="width: 290px; height: 10px;"></div>
 	<!--</form>
