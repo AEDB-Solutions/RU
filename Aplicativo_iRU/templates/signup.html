@@ -8,17 +8,17 @@
           <span class="input-label">Usuário: </span>
           <input placeholder="Digite nome completo" type="text" maxlength="50" id="userName">
         </label>
-         <span class='msg-erro msg-name'></span>
+         <span class='msg-erro msg-name' style="color:white;text-align:left"></span>
         <label class="item item-input">
           <span class="input-label">Matricula: </span>
           <input name="matricula1" placeholder="42/4242424" type="text" onkeyup="maskMatricula(this);" maxlength="10" id="matrIcula">
         </label>
-          <span class='msg-erro msg-matricula'></span>
+          <span class='msg-erro msg-matricula'style="color:white;text-align:left"></span>
         <label class="item item-input">
           <span class="input-label">Email: </span>
           <input placeholder="exemplo@exemplo.com" type="text" id="Email">
         </label>
-          <span class='msg-erro msg-email'></span>
+          <span class='msg-erro msg-email'style="color:white;text-align:left"></span>
           <label class="item item-input">
             <span class="input-label">CPF: </span>
             <input name="cpfreg" placeholder="424.242.424-24" type="text" onkeyup="maskCPF(this);" maxlength="14" id="cpf">
@@ -47,19 +47,18 @@
               <option>Medicina</option>
               <option>Direito</option>
               <option>Economia</option>
+              <option>Outros</option>
             </select>
           </label>
         <label class="item item-input">
           <span class="input-label">Senha: </span>
           <input placeholder="Mínimo de 6 caracteres" type="password" id="passWord">
         </label>
-          <span class='msg-erro msg-password'></span>
           <label class="item item-input">
             <span class="input-label">Confirme sua senha: </span>
             <input placeholder="" type="password" id="passWord2">
           </label>
-          <span class='msg-error msg-password'></span>
-        <div class="spacer" style="height: 30px;"></div>
+          <span class='msg-error msg-password' style="color:white;text-align:left"></span>
       </ion-list>
       <b ui-sref="signup" id="signup-button10" class="button button-stable button-block" ng-click='enviacadastro()'>Cadastrar!</b>
     </form>
