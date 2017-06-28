@@ -69,6 +69,8 @@ Class Controller {
         $sql = "SELECT Data, valor FROM Presentes WHERE Remetente = '$matricula'";
         if($result = mysqli_query($conn, $sql)){
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $send["data"] = $row["Data"];
+            $send["valor"] = -$row["valor"];
             array_push($final,$send);
           }
         }

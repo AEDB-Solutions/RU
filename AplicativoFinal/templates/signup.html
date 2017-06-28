@@ -1,0 +1,68 @@
+<ion-view title="Cadastro" id="page7" style="background-color: rgb(237, 8, 58);">
+<ion-content class="has-header" padding="true" style="background: url(img/MeUjzLDyQPSHZmVDWmyb_background20sem20logo.png) no-repeat center;background-size:cover;">
+<div class="spacer" style="width: 290px; height: 15px;"></div>
+    <form id="contact-form" class="list">
+    <form name = "contact-form" id="signup-form1" class="list">
+      <ion-list id="signup-list1">
+        <div class="spacer" style="height: 15px;"></div>
+        <label class="item item-input">
+          <span class="input-label">Usuário: </span>
+          <input placeholder="Digite nome completo" type="text" maxlength="50" id="userName">
+        </label>
+         <span class='msg-erro msg-name' style="color:white;text-align:left"></span>
+        <label class="item item-input">
+          <span class="input-label">Matricula: </span>
+          <input name="matricula1" placeholder="42/4242424" type="text" onkeyup="maskMatricula(this);" maxlength="10" id="matrIcula">
+        </label>
+          <span class='msg-erro msg-matricula' style="color:white;text-align:left"></span>
+        <label class="item item-input">
+          <span class="input-label">Email: </span>
+          <input placeholder="exemplo@exemplo.com" type="text" id="Email">
+        </label>
+          <span class='msg-erro msg-email'style="color:white;text-align:left"></span>
+          <label class="item item-input">
+            <span class="input-label">CPF: </span>
+            <input name="cpfreg" placeholder="424.242.424-24" type="text" onkeyup="maskCPF(this);" maxlength="14" id="cpf">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Idade: </span>
+            <input placeholder="Sua idade" type="text" id="age">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Gênero: </span>
+            <select class="ion-input-select--large" id="gender">
+              <option>---------------------</option>
+              <option>Masculino</option>
+              <option>Feminino</option>
+              <option>Outros</option>
+            </select>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Curso: </span>
+            <select class="ion-input-select--large" id="curso">
+              <option>---------------------</option>
+              <option>Adminstração</option>
+              <option>Engenharia</option>
+              <option>Letras</option>
+              <option>Biologia</option>
+              <option>Medicina</option>
+              <option>Direito</option>
+              <option>Economia</option>
+              <option>Outros</option>
+            </select>
+          </label>
+        <label class="item item-input">
+          <span class="input-label">Senha: </span>
+          <input placeholder="Mínimo de 6 caracteres" type="password" id="passWord">
+        </label>
+          <label class="item item-input">
+            <span class="input-label">Confirme sua senha: </span>
+            <input placeholder="" type="password" id="passWord2">
+          </label>
+          <span class='msg-error msg-password' style="color:white;text-align:left"></span>
+      </ion-list>
+      <div class="spacer" style="width: 290px; height: 30px;"></div>
+      <b ui-sref="signup" id="signup-button10" class="button button-stable button-block" ng-click='enviacadastro()'>Cadastrar!</b>
+    </form>
+  </ion-content>
+</ion-view>
