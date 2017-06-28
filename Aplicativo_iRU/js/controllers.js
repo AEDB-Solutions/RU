@@ -403,15 +403,13 @@ function ($scope, $stateParams, $http, $ionicPopup) {
 
 	$scope.enviadadosgift = function ()
 	{
-    $scope.matricula = localStorage.getItem("matricula");
-    var matricula = $scope.matricula
-    alert(matricula)
+   		$scope.matricula = localStorage.getItem("matricula");
+   	 	var matricula = $scope.matricula
 		var gmatriculagift = document.getElementById("matriculagift").value;
 		var gqtrefeicoesgift = document.getElementById("qtrefeicoesgift").value;
 		var gpasswordconfirm = document.getElementById("confirmpassword").value;
 		var gift = [$scope.matricula,gmatriculagift,gqtrefeicoesgift,gpasswordconfirm]
   		var parameter = JSON.stringify({type:'Presente',matricula:matricula,matriculagift:gmatriculagift,refeicoes:gqtrefeicoesgift,password:gpasswordconfirm});
-      alert(parameter);
         	$http.post("presente.php", parameter).
         success(function(data,status,headers,config)
         {
@@ -495,8 +493,60 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 function ($scope, $stateParams, $http, $ionicPopup, $state) {
 	$scope.sendnewpassword = function ()
 	{
-		var cmatricula = document.getElementById("cmatricula").value;
-		if(npassword.value == cnpassword.value)
+		var filtro_cmatricula = /^[0-9 /]+$/;
+    	caixa_matricula = document.querySelector('.msg-matricula');
+    	caixa_matricula.style.display = 'none';
+    if(cmatricula.value == "")
+    {
+        caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Campo matricula vazio</div>";
+        caixa_matricula.style.display = 'block';
+        return;
+    }
+    else
+      {
+      if(!filtro_cmatricula.test(cmatricula.value))
+        {
+        caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Matricula deve conter apenas números</div>";
+        caixa_matricula.style.display = 'block';
+        return;
+        }
+      else
+        {
+        if(cmatricula.value.length != 10)
+        {
+          caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Matricula deve possuir 9 caracteres</div>";
+          caixa_matricula.style.display = 'block';
+          return;
+        }
+        else cmatricula = document.getElementById("cmatricula").value;
+        }
+      caixa_password = document.querySelector('.msg-password');
+      caixa_password.style.display = 'none';
+      if(npassword.value == "")
+      {
+        caixa_password.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Digite uma senha de pelo menos 6 dígitos</div>";
+        caixa_password.style.display = 'block';
+        return;
+      }
+        if(npassword.value.length < 6)
+        {
+          caixa_password.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Senha muito curta</div>";
+          caixa_password.style.display = 'block';
+          return;
+        }
+        else
+        {
+          if(npassword.value == cnpassword.value)
+          {
+            newpassword = document.getElementById("npassword").value;
+          }
+          else {
+            caixa_password.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Senhas diferentes</div>";
+            caixa_password.style.display = 'block';
+            return;
+          }
+        }        
+		/*if(npassword.value == cnpassword.value)
           {
             newpassword = document.getElementById("npassword").value;
           }
@@ -504,14 +554,15 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
           {
             alert("Senhas colocadas são diferentes");
             return;
-          }
+          }*/
+       }
 		var parameter = JSON.stringify({type:'Users',matricula:cmatricula,password:newpassword})
         $http.post("Npassword.php", parameter).
         success(function(data,status,headers,config)
         {
           if(data == true)
           {
-            alert("Sucesso");
+            alert("Senha alterada com sucesso");
             $state.go("login");
           }
           else alert("Falha na troca de senha");

@@ -79,9 +79,9 @@ echo json_encode(array());
   <form id="contact-form" class="list">
   <form name="contact-form" id="dados-form" class="list">
   	<ion-list id="dados-list">
-    <div class="spacer" style="width: 290px; height: 80px;"></div>
+    <div class="spacer" style="width: 290px; height: 60px;"></div>
   	<label class="item item-output">
-        <span class="output-label">Refeitorio 1:</span>
+        <span class="output-label">Refeitório 1:</span>
         <output type="text">
         <?php
         	echo "$count1 <br>";
@@ -89,7 +89,7 @@ echo json_encode(array());
     </label>
         <div class="spacer" style="width: 290px; height: 20px;"></div>
     <label class="item item-output">
-        <span class="output-label">Refeitorio 2:</span>
+        <span class="output-label">Refeitório 2:</span>
         <output type="text">
         <?php
         	echo "$count2 <br>";
@@ -97,7 +97,7 @@ echo json_encode(array());
     </label>
         <div class="spacer" style="width: 290px; height: 20px;"></div>
     <label class="item item-output">
-        <span class="output-label">Refeitorio 3:</span>
+        <span class="output-label">Refeitório 3:</span>
         <output type="text">
         <?php
         	echo "$count3 <br>";
@@ -105,7 +105,7 @@ echo json_encode(array());
     </label>
         <div class="spacer" style="width: 290px; height: 20px;"></div>
     <label class="item item-output">
-        <span class="output-label">Refeitorio 4:</span>
+        <span class="output-label">Refeitório 4:</span>
         <output type="text">
         <?php
         	echo "$count4 <br>";
@@ -113,7 +113,7 @@ echo json_encode(array());
     </label>
     <div class="spacer" style="width: 290px; height: 20px;"></div>
     <label class="item item-output">
-        <span class="output-label">Refeitorio 5:</span>
+        <span class="output-label">Refeitório 5:</span>
         <output type="text">
         <?php
         	echo "$count5 <br>";
@@ -121,7 +121,7 @@ echo json_encode(array());
     </label>
     <div class="spacer" style="width: 290px; height: 20px;"></div>
     <label class="item item-output">
-        <span class="output-label">Refeitorio 6:</span>
+        <span class="output-label">Refeitório 6:</span>
         <output type="text">
         <?php
         	echo "$count6 <br>";

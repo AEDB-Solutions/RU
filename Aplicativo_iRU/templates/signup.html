@@ -1,5 +1,6 @@
 <ion-view title="Cadastro" id="page7" style="background-color: rgb(237, 8, 58);">
 <ion-content class="has-header" padding="true" style="background: url(img/MeUjzLDyQPSHZmVDWmyb_background20sem20logo.png) no-repeat center;background-size:cover;">
+<div class="spacer" style="width: 290px; height: 15px;"></div>
     <form id="contact-form" class="list">
     <form name = "contact-form" id="signup-form1" class="list">
       <ion-list id="signup-list1">
@@ -30,7 +31,7 @@
           <label class="item item-input">
             <span class="input-label">Gênero: </span>
             <select class="ion-input-select--large" id="gender">
-              <option>-------------</option>
+              <option>---------------------</option>
               <option>Masculino</option>
               <option>Feminino</option>
               <option>Outros</option>
@@ -39,7 +40,7 @@
           <label class="item item-input">
             <span class="input-label">Curso: </span>
             <select class="ion-input-select--large" id="curso">
-              <option>-------------</option>
+              <option>---------------------</option>
               <option>Adminstração</option>
               <option>Engenharia</option>
               <option>Letras</option>
@@ -60,6 +61,7 @@
           </label>
           <span class='msg-error msg-password' style="color:white;text-align:left"></span>
       </ion-list>
+      <div class="spacer" style="width: 290px; height: 30px;"></div>
       <b ui-sref="signup" id="signup-button10" class="button button-stable button-block" ng-click='enviacadastro()'>Cadastrar!</b>
     </form>
   </ion-content>
