@@ -10,7 +10,7 @@
     Olá  {{myName}} 
   </ion-card-header>
   <ion-card-content>
-    seu saldo atual é de: "{{mySaldo}}" 
+    seu saldo atual é de: {{mySaldo}} 
   </ion-card-content>
 </ion-card>
     <div class="spacer" style="width: 290px; height: 10px;"></div>
