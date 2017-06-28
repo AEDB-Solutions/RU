@@ -25,6 +25,15 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
 input[type=submit]:hover {
     background-color: #45a049;
@@ -41,7 +50,7 @@ div {
 <body>
 	<form action="logMF.php" method="get">
 	<input type="text" placeholder="User" name="User"><br>
-	<input type="text" placeholder="Senha" name="Password"><br>
+	<input type="password" placeholder="Senha" name="Password"><br>
 	<input type="submit" value="Entrar como Administrador">
 	</form>
 </body>
