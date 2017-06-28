@@ -8,7 +8,7 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('signupCtrl', ['$scope', '$http', '$stateParams',function ($scope,$http){ // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('signupCtrl', ['$scope','$http','$stateParams','$state',function ($scope,$http,$stateParams,$state){ // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 //function ($scope,$http, $stateParams)
@@ -191,11 +191,11 @@ return cboll;
       $http.post("Signup.php", parameter).
         success(function(data,status,headers,config)
         {
-          console.log(data);
+          $state.go("login");
         }).
         error(function(data,status,headers,config)
         {
-          console.log("Error");
+          alert("Erro na conexão");
         })
         if(success=true)
         {
@@ -203,7 +203,7 @@ return cboll;
         }
         else
         {
-          alert('Error')
+          alert('Erro no cadastramento');
         }
     };
 }])
@@ -264,14 +264,13 @@ return cboll;
           {
             if(data == false)
             {
-              //alert("Matrícula ou senha inválidas");
-              alert(data);
+              alert("Matrícula ou senha inválidas");
             }
           }
         }).
         error(function(data,status,headers,config)
         {
-          console.log("Error");
+          console.log("Erro na conexão");
         });
   }
 }])
@@ -336,7 +335,6 @@ function ($scope, $stateParams, $http) {
 		var parser, xmlDoc;
 		var quantidade = document.getElementById("qtrefeicoes").value;
 		var matricula = $scope.matricula;
-    alert(matricula);
    // matricula = matricula.replace(/\\/g, '');
 		var text = "<checkout>" +
 		  "<currency>BRL</currency>" +
@@ -355,7 +353,6 @@ function ($scope, $stateParams, $http) {
 		    "<email>ruonlineunb@gmail.com</email>" +
 		  "</receiver>" +
 		"</checkout>";
-    alert(text);
 		$http
 		({
     		method: 'POST',
@@ -373,7 +370,7 @@ function ($scope, $stateParams, $http) {
     }).
     error(function(data,status,headers,config)
     {
-      alert(data);
+      alert("Erro na conexão");
     });
 }}])
 
@@ -414,11 +411,11 @@ function ($scope, $stateParams, $http, $ionicPopup) {
           {
             alert("Presente enviado com sucesso");
           }
-          else alert(data);
+          else alert("Matricula inválida ou saldo insuficiente");
         }).
         error(function(data,status,headers,config)
         {
-          console.log("Error");
+          console.log("Erro na conexão");
         })
     };
 }])
@@ -475,7 +472,7 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
           {
             $state.go("newpassword");
           }
-          else alert("CPF ou Email invalidos");
+          else alert("CPF ou Email inválido");
         }).
         error(function(data,status,headers,config)
         {
@@ -509,11 +506,11 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
             alert("Sucesso");
             $state.go("login");
           }
-          else alert(data);
+          else alert("Falha na troca de senha");
         }).
         error(function(data,status,headers,config)
         {
-          console.log("Error");
+          console.log("Erro na conexão");
         })
     };
 }])
@@ -586,7 +583,7 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
         }).
         error(function(data,status,headers,config)
         {
-          console.log("Error");
+          alert("Erro na conexão");
         })
   }
 }])
@@ -600,11 +597,10 @@ function ($scope, $stateParams, $http, $ionicPopup, $state) {
 		$http.post("testeQR.php",parameter).
 		success(function(data,status,headers,config)
 		{
-      alert(data);
-      $scope.myImg = "img_qrcodes/" + data + ".png";
+      		$scope.myImg = "img_qrcodes/" + data + ".png";
 		}).
 		error(function(data,status,headers,config)
 		{
-			alert("Error");
+			alert("Erro na conexão");
 		})
 })
