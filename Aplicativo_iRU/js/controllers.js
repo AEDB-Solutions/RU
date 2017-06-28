@@ -216,28 +216,35 @@ return cboll;
     var filtro_matricula = /^[0-9 /]+$/;
     var ematricula = document.getElementById('matricula').value;
     var epassword = document.getElementById('password').value;
+    caixa_matricula = document.querySelector('.msg-matricula');
+    caixa_matricula.style.display = 'none';
     if(matricula.value == "")
     {
-      alert('Favor preencer sua matrícula');
-      return;
+        caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Campo matricula vazio</div>";
+        caixa_matricula.style.display = 'block';
+        return;
     }
     else
       {
       if(!filtro_matricula.test(matricula.value))
         {
-        alert('Preencha a matrícula apenas com números')
+        caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Matricula deve conter apenas números</div>";
+        caixa_matricula.style.display = 'block';
         return;
         }
       else
         {
         if(matricula.value.length != 10)
         {
-          alert('Matricula inválida. Matricula deve possuir 9 caracteres')
+          caixa_matricula.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Matricula deve possuir 9 caracteres</div>";
+          caixa_matricula.style.display = 'block';
           return;
         }
         else rmatricula = document.getElementById("matricula").value;
         }
       }
+        caixa_password = document.querySelector('.msg-password');
+    	caixa_password.style.display = 'none';
       if(password.value == "")
       {
         alert('Digite uma senha de pelo menos 6 dígitos')
@@ -245,7 +252,8 @@ return cboll;
       }
         if(password.value.length < 6)
         {
-          alert('Senha muito curta')
+          caixa_password.innerHTML = "<div class='alert alert-danger' role='alert'> <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>Senha muito curta. Minimo de 6 caracteres</div>";
+          caixa_password.style.display = 'block';
           return;
         }
         else rpassword = document.getElementById("password").value;

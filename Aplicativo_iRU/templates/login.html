@@ -7,10 +7,12 @@
           <span class="input-label">Matrícula:</span>
            <input name="matricula2" placeholder="42/4242424" type="text" onkeyup="maskMatriculaLogin(this);" maxlength="10" id="matricula">
         </label>
+        <span class='msg-erro msg-matricula' style="color:white;text-align:left"></span>
         <label class="item item-input">
           <span class="input-label">Senha:</span>
           <input placeholder="Mínimo de 6 caracteres" type="password" id="password">
         </label>
+        <span class='msg-error msg-password' style="color:white;text-align:left"></span>
       </ion-list>
      <div class="spacer" style="height: 5px;"></div>
       <a id="login-button5" class="button button-dark  button-block" ng-click="entrar()">Entrar</a>
