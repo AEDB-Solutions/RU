@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 28, 2017 at 08:12 PM
+-- Generation Time: Jul 03, 2017 at 06:36 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.1
 
@@ -34,7 +34,10 @@ CREATE TABLE `Admins` (
 
 INSERT INTO `Admins` (`ID`, `User`, `Nome`, `Cargo`, `Senha`) VALUES
 (1, 'admin', 'admin', 'Todo poderoso', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-(14, 'Lucas', 'Lucas', 'desenvolvedor', '942f8f3db91bd2bbbd672bc0fbeb509d21ee900a9353577c0f1bb19abe2ffae6');
+(14, 'Lucas', 'Lucas', 'desenvolvedor', '942f8f3db91bd2bbbd672bc0fbeb509d21ee900a9353577c0f1bb19abe2ffae6'),
+(15, 'abdu', 'abdu', 'eletrica', 'f03373ea800c5878b6798c5813250d32f8ecde7f1df6254bdacdf194441c84fe'),
+(16, 'gabriel', 'gabriel', 'adorador do schiavini', '2ecb85bfcf286c7a3f751eec0acf8545fc15e8e8c8ec1519719195c35c169b8f'),
+(17, '', '', '', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 
 -- --------------------------------------------------------
 
@@ -59,7 +62,10 @@ CREATE TABLE `Compras` (
 INSERT INTO `Compras` (`ID`, `Codigo`, `Matricula`, `Email`, `Valor`, `Data`, `Horario`) VALUES
 (3, '75B0D1B8-3406-4A4C-B7CD-D8133A66C73C', '14/0150498', 'bamidele.lucas@gmail.com', 2.5, '2017-05-31', '13:56:52.000000'),
 (4, 'laASLKDJALSKDFAHF9ROI1N3K4J2', '14/0150498', 'bamidele.lucas@gmail.com', 10, '2017-06-22', '10:00:00.000000'),
-(5, 'MKGJ90RUQRK4MFJM,R', '14/0150498', 'bamidele.lucas@gmail.com', -2.5, '2017-06-13', '12:30:00.000000');
+(5, 'MKGJ90RUQRK4MFJM,R', '14/0150498', 'bamidele.lucas@gmail.com', -2.5, '2017-06-13', '12:30:00.000000'),
+(6, 'ASUDAEKJRBKNAM,ND', '15/0089392', 'asdasd@asldk.com', 20, '2017-06-29', '15:47:54.000000'),
+(7, 'ASJLDALSDNM,ERM,T,T,M', '13/6670707', 'asdasd@masdkland.unb.br', 30, '2017-06-29', '16:26:10.000000'),
+(9, 'AKDBBRBBR', '15/0079371', 'asdads@balsdkalsd.asd', 30, '2017-06-29', '16:39:08.000000');
 
 -- --------------------------------------------------------
 
@@ -226,7 +232,7 @@ INSERT INTO `Distancias` (`ID`, `Origem`, `Destino`, `Distancia`, `Tempo`) VALUE
 CREATE TABLE `Entradas` (
   `ID` int(11) NOT NULL,
   `Matricula` varchar(10) NOT NULL,
-  `Horario` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Horario` time NOT NULL,
   `Refeitorio` enum('1','2','3','4','5','6') NOT NULL,
   `Data` date NOT NULL DEFAULT '0000-00-00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -236,45 +242,8 @@ CREATE TABLE `Entradas` (
 --
 
 INSERT INTO `Entradas` (`ID`, `Matricula`, `Horario`, `Refeitorio`, `Data`) VALUES
-(1, '66/67657', '2017-05-18 00:05:40', '1', '0000-00-00'),
-(2, '4543534', '2017-05-18 00:18:09', '1', '0000-00-00'),
-(3, '556776', '2017-05-18 00:18:13', '1', '0000-00-00'),
-(4, '6655544', '2017-05-18 00:18:16', '1', '0000-00-00'),
-(5, '5452543', '2017-05-18 00:18:20', '1', '0000-00-00'),
-(6, '54543543', '2017-05-18 00:18:24', '1', '0000-00-00'),
-(7, '445665', '2017-05-18 00:18:27', '1', '0000-00-00'),
-(8, '45353467', '2017-05-18 00:18:31', '1', '0000-00-00'),
-(9, '354353', '2017-05-18 00:18:34', '1', '0000-00-00'),
-(10, '235255', '2017-05-18 00:18:38', '1', '0000-00-00'),
-(11, '353252', '2017-05-18 00:18:42', '1', '0000-00-00'),
-(12, '546365', '2017-05-18 00:18:45', '1', '0000-00-00'),
-(13, '677865', '2017-05-18 00:18:48', '1', '0000-00-00'),
-(14, '6332525', '2017-05-18 00:18:51', '1', '0000-00-00'),
-(15, '8778', '2017-05-22 16:17:46', '1', '0000-00-00'),
-(16, '4353453', '2017-06-07 17:17:55', '1', '0000-00-00'),
-(17, '4643646', '2017-06-07 17:20:56', '1', '0000-00-00'),
-(18, '45354353', '2017-06-07 17:42:04', '1', '0000-00-00'),
-(19, '4353543', '2017-06-12 17:07:30', '1', '0000-00-00'),
-(20, '4534543', '2017-06-12 17:08:52', '2', '0000-00-00'),
-(21, '4364364', '2017-06-12 17:18:30', '6', '0000-00-00'),
-(22, '3454353', '2017-06-12 17:18:51', '6', '0000-00-00'),
-(23, '4564645', '2017-06-12 17:28:22', '3', '0000-00-00'),
-(24, '4645646', '2017-06-12 17:28:31', '4', '0000-00-00'),
-(25, '546464', '2017-06-12 17:28:40', '5', '0000-00-00'),
-(26, '455464', '2017-06-12 17:28:48', '6', '0000-00-00'),
-(27, '43446', '2017-06-12 17:28:57', '6', '0000-00-00'),
-(28, '464645', '2017-06-12 17:49:35', '6', '0000-00-00'),
-(29, '4353543', '2017-06-12 19:17:56', '2', '0000-00-00'),
-(30, '/', '2017-06-28 15:57:06', '1', '0000-00-00'),
-(31, '/', '2017-06-28 15:57:43', '1', '0000-00-00'),
-(32, '/', '2017-06-28 15:59:43', '6', '0000-00-00'),
-(33, '/', '2017-06-28 16:01:08', '6', '0000-00-00'),
-(34, '/', '2017-06-28 16:02:33', '6', '0000-00-00'),
-(35, '/', '2017-06-28 16:03:11', '6', '0000-00-00'),
-(36, '/', '2017-06-28 16:04:46', '6', '0000-00-00'),
-(37, '/', '2017-06-28 16:05:13', '6', '0000-00-00'),
-(38, '14/0150498', '2017-06-28 16:07:09', '6', '0000-00-00'),
-(39, '14/0150498', '2017-06-28 17:09:05', '6', '0000-00-00');
+(45, '<s/pan sty', '05:47:24', '6', '2017-07-03'),
+(46, '14/0150498', '00:48:02', '6', '2017-07-03');
 
 -- --------------------------------------------------------
 
@@ -331,7 +300,14 @@ CREATE TABLE `Presentes` (
 --
 
 INSERT INTO `Presentes` (`ID`, `Remetente`, `Destinatario`, `valor`, `Data`) VALUES
-(0, '14/0150498', '13/0018007', 5, '0000-00-00');
+(0, '14/0150498', '13/0018007', 5, '0000-00-00'),
+(0, '14/0150498', '13/0018007', 2.5, '0000-00-00'),
+(0, '15/0089392', '14/0150498', 5, '0000-00-00'),
+(0, '13/6670707', '14/0150498', 5, '0000-00-00'),
+(0, '15/0079371', '14/0150498', 5, '0000-00-00'),
+(0, '14/0150498', '13/01301023', 5, '0000-00-00'),
+(0, '13/6670707', '14/0150498', 2.5, '2017-07-03'),
+(0, '14/0150498', '13/6670707', 5, '2017-07-03');
 
 -- --------------------------------------------------------
 
@@ -345,7 +321,7 @@ CREATE TABLE `Users` (
   `Matricula` varchar(10) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `CPF` varchar(11) NOT NULL,
+  `CPF` varchar(14) NOT NULL,
   `Gender` varchar(255) NOT NULL,
   `Age` int(20) NOT NULL,
   `Curso` varchar(255) NOT NULL
@@ -358,7 +334,11 @@ CREATE TABLE `Users` (
 INSERT INTO `Users` (`ID`, `Username`, `Matricula`, `Email`, `Password`, `CPF`, `Gender`, `Age`, `Curso`) VALUES
 (4, 'Lucas Bamidele', '14/0150498', 'bamidele.lucas@gmail.com', '942f8f3db91bd2bbbd672bc0fbeb509d21ee900a9353577c0f1bb19abe2ffae6', '04424668118', 'Masculino', 20, 'Engenharia Elétrica'),
 (7, 'Thiago Holanda', '13/0018007', 'thiago.q.holanda@gmail.com', 'ed38b382e8175142ccf47010c73e5a650a40d47a760f0525fe2516d7eb8e004b', '03376162131', 'Masculino', 22, 'Engenharia Eletrica'),
-(8, 'Pedro Teste', '13/0130098', 'lala@gmail.com', '3f29e1b2b05f8371595dc761fed8e8b37544b38d56dfce81a551b46c82f2f56b', '123.123.123', 'Masculino', 20, 'Engenharia');
+(8, 'Pedro Teste', '13/0130098', 'lala@gmail.com', '3f29e1b2b05f8371595dc761fed8e8b37544b38d56dfce81a551b46c82f2f56b', '123.123.123', 'Masculino', 20, 'Engenharia'),
+(9, 'Testando', '15/0005504', 'andre.ribeiro@engnetconsultoria.com.br', 'c47da262c69b2aed198998c970c5e0b116f9aa7ee70fcc1d8a8b6153b4650ba0', '003.165.901-26', 'Masculino', 20, 'Engenharia'),
+(10, 'Abdullah Zaiter', '15/0089392', 'abdu@droid.unb.br', '75ee3fc45d438c7c7089103cdf132ce33a6c7c3c69e412165af37322e8d74bb3', '123.123.123-12', 'Outros', 20, 'Letras'),
+(11, 'Gabriel', '13/6670707', 'asd@droid.unb.br', '2ecb85bfcf286c7a3f751eec0acf8545fc15e8e8c8ec1519719195c35c169b8f', '123.123.123-13', 'Outros', 22, 'Adminstração'),
+(12, 'Gabriel Lins', '15/0079371', 'gabriel@droid.unb.br', '593fdc44bf914de8a9a495cfe1c8949bd8dd9701c1654edb9abdc352c4c035bc', '123.123.333-12', 'Outros', 20, 'Adminstração');
 
 --
 -- Indexes for dumped tables
@@ -416,12 +396,12 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Admins`
 --
 ALTER TABLE `Admins`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Compras`
 --
 ALTER TABLE `Compras`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `Distancias`
 --
@@ -431,7 +411,7 @@ ALTER TABLE `Distancias`
 -- AUTO_INCREMENT for table `Entradas`
 --
 ALTER TABLE `Entradas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `Locais`
 --
@@ -441,4 +421,4 @@ ALTER TABLE `Locais`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
