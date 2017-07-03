@@ -3,7 +3,7 @@ include ('connectDB.php');
 include ('OperationController.php');
 require_once "PagSeguroLibrary/PagSeguroLibrary.php";
 Class Controller {
-	function check($matricula, $senha){
+  function check($matricula, $senha){
      $myConnect = new ConnectDB();
      $myConnect->Connect();
      $conn = $myConnect->conn;
@@ -28,18 +28,18 @@ Class Controller {
    }
 
    function registrar($username, $matricula, $email, $password, $CPF, $gender, $age, $curso){
-		$myConnect = new ConnectDB();
-		$myConnect->Connect();
-		$conn = $myConnect->conn;
-		$criptografia = hash('sha256',$password);
-		//$criptografiaprabotapafuder = hash('sha256',$criptografia); Se quiser usar essa outra função,seria a criptografia da criptografia.
-		$sql = "INSERT INTO Users (Username, Matricula, Email, Password, CPF, Gender, Age, Curso) VALUES ('$username', '$matricula', '$email', '$criptografia', '$CPF', '$gender', '$age', '$curso')";
-		if(mysqli_query($conn, $sql)){
-			echo "Records inserted successfully.";
-		} else{
-			echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-		}
-	}
+    $myConnect = new ConnectDB();
+    $myConnect->Connect();
+    $conn = $myConnect->conn;
+    $criptografia = hash('sha256',$password);
+    //$criptografiaprabotapafuder = hash('sha256',$criptografia); Se quiser usar essa outra função,seria a criptografia da criptografia.
+    $sql = "INSERT INTO Users (Username, Matricula, Email, Password, CPF, Gender, Age, Curso) VALUES ('$username', '$matricula', '$email', '$criptografia', '$CPF', '$gender', '$age', '$curso')";
+    if(mysqli_query($conn, $sql)){
+      echo "Records inserted successfully.";
+    } else{
+      echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    }
+  }
   function checkUserCredit($matricula){
     $myConnect = new ConnectDB();
     $myConnect->Connect();
@@ -70,8 +70,9 @@ Class Controller {
         $sql = "SELECT Data, valor FROM Presentes WHERE Remetente = '$matricula'";
         if($result = mysqli_query($conn, $sql)){
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $send["data"] = $row["Data"];
+            $send["valor"] = -$row["valor"];
             array_push($final,$send);
-
           }
         }
         $sql = "SELECT Data, valor FROM Presentes WHERE Destinatario = '$matricula'";
@@ -82,7 +83,7 @@ Class Controller {
             array_push($final,$send);
           }
         }
-        $sql = "SELECT * FROM Entrada WHERE Matricula = '$matricula'";
+        $sql = "SELECT * FROM Entradas WHERE Matricula = '$matricula'";
         if($result = mysqli_query($conn, $sql)){
           while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
             $send["data"] = $row["Data"];
@@ -121,10 +122,10 @@ Class Controller {
 
 function saldo($matricula){
   $sum;
-	$myConnect = new ConnectDB();
-	$myConnect->Connect();
-	$conn = $myConnect->conn;
-	$sql = "SELECT sum(Valor) FROM Compras WHERE Matricula = '$matricula'";
+  $myConnect = new ConnectDB();
+  $myConnect->Connect();
+  $conn = $myConnect->conn;
+  $sql = "SELECT sum(Valor) FROM Compras WHERE Matricula = '$matricula'";
   $rs = mysqli_query($conn, $sql);
   if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
   $row = mysqli_fetch_row($rs);
@@ -139,7 +140,13 @@ function saldo($matricula){
   if(FALSE == $rs) die("Select sum failed: ".mysqli_error);
   $row = mysqli_fetch_row($rs);
   $sum -= $row[0];
-	return $sum;
+  $sql = "SELECT * FROM Entradas WHERE Matricula = '$matricula'";
+        if($result = mysqli_query($conn, $sql)){
+          while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $sum -= 2.5;
+          }
+        }
+  return $sum;
 }
 
   function getNumberOfPeople(){
@@ -170,7 +177,7 @@ function saldo($matricula){
     $sql = "SELECT ID, Matricula, Horario, Refeitorio FROM Entradas";
     $result = mysql_query($sql, $conecta);
     //INICIANDO CONTADOR
-    $count1 = 0; 
+    $count1 = 10; 
     $count2 = 0; 
     $count3 = 0; 
     $count4 = 0; 
@@ -193,7 +200,7 @@ function saldo($matricula){
 
       $days_interval = $intervalo->format("%a");
       $hours = $intervalo->format("%H");
-      $minutes = $intervalo->format("%I");
+      $minutes = $intervalo->format("%i");
 
       if($days_interval == 0){
         if($hours == 00){
@@ -292,7 +299,8 @@ function saldo($matricula){
         die();
       }
       else {
-        $sql = "INSERT INTO Presentes (Remetente, Destinatario, valor) VALUES ('$matriculaSender', '$matriculaReceiver', '$valor')";
+        $dataAtual = date("Y-m-d");
+        $sql = "INSERT INTO Presentes (Remetente, Destinatario, valor, Data) VALUES ('$matriculaSender', '$matriculaReceiver', '$valor', '$dataAtual')";
         if(mysqli_query($conn, $sql)){
             echo true;
         }
